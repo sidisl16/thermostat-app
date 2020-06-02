@@ -47,7 +47,7 @@ public class DeviceDataObserver implements MessageObserver {
 		try {
 			process(message.getPayload());
 		} catch (Exception e) {
-			logger.log(Level.SEVERE, "Unknown message recieved, messageId[" + message.getId() + "]");
+			logger.log(Level.SEVERE, "Unknown message recieved, messageId[" + message.getId() + "] "+e.getMessage());
 		}
 	}
 
