@@ -27,9 +27,9 @@ public class DeviceDataDALImpl implements DeviceDataDAL {
 
 		Criteria criteria = Criteria.where("device_id").is(device.getId()).and("day").is(getCurrentdateMillis());
 		Query query = new Query(criteria);
-
+	
 		Update update = new Update().push("events", event).inc("samples", 1).set("last", (long) event.getTimestamp());
-
+		
 		return mongoTemplate.upsert(query, update, DeviceData.class);
 	}
 

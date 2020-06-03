@@ -1,16 +1,21 @@
 package com.sid.thermostat.app.mongo.repositories;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.bson.types.ObjectId;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sid.thermostat.app.ThermostatAppApplicationTests;
@@ -20,7 +25,8 @@ import com.sid.thermostat.app.mongo.entites.DeviceData;
 import com.sid.thermostat.app.mongo.entites.Event;
 import com.sid.thermostat.app.mongo.entites.Status;
 
-public class MongoReposirotyTest extends ThermostatAppApplicationTests {
+@TestMethodOrder(OrderAnnotation.class)
+public class MongoRepositoryTest extends ThermostatAppApplicationTests {
 
 	@Autowired
 	private ConfigurationRepository configRepo;
@@ -34,8 +40,10 @@ public class MongoReposirotyTest extends ThermostatAppApplicationTests {
 	private ObjectId deviceId;
 	private ObjectId configId;
 	private ObjectId dataId;
+	private String serialNo = "SERIAL2R345";
 
 	@Test
+	@Order(1)
 	public void testDevicePersistance() {
 		Config config = new Config();
 		config.setConfigTopic("/inbound/configuration/SERIAL2R345");
@@ -55,7 +63,7 @@ public class MongoReposirotyTest extends ThermostatAppApplicationTests {
 		Device device = new Device();
 		device.setIpAddress("192.168.2.2");
 		device.setMacAddress("AS:34:D5:G8:P0");
-		device.setSerialNo("SERIAL2R345");
+		device.setSerialNo(serialNo);
 		device.setConfig(config);
 
 		device = deviceRepo.save(device);
@@ -66,6 +74,15 @@ public class MongoReposirotyTest extends ThermostatAppApplicationTests {
 	}
 
 	@Test
+	@Order(2)
+	public void testFindBySerialNo() {
+		Optional<Device> device = deviceRepo.findBySerialNo(serialNo);
+		assertTrue(device.isPresent());
+		deviceId = device.get().getId();
+	}
+
+	@Test
+	@Order(3)
 	public void testDeviceDataPersistance() throws ParseException {
 
 		Long first = System.currentTimeMillis();
@@ -103,7 +120,7 @@ public class MongoReposirotyTest extends ThermostatAppApplicationTests {
 		dataId = data.getId();
 	}
 
-	@AfterEach
+	@AfterAll
 	public void cleanUp() {
 
 		if (configId != null) {
