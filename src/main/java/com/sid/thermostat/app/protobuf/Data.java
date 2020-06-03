@@ -17,7 +17,6 @@ private static final long serialVersionUID = 0L;
   }
   private Data() {
     serialNo_ = "";
-    unit_ = 0;
   }
 
   @java.lang.Override
@@ -60,12 +59,6 @@ private static final long serialVersionUID = 0L;
             temperature_ = input.readFloat();
             break;
           }
-          case 32: {
-            int rawValue = input.readEnum();
-
-            unit_ = rawValue;
-            break;
-          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -96,104 +89,6 @@ private static final long serialVersionUID = 0L;
     return com.sid.thermostat.app.protobuf.App.internal_static_thermostat_app_Data_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             com.sid.thermostat.app.protobuf.Data.class, com.sid.thermostat.app.protobuf.Data.Builder.class);
-  }
-
-  /**
-   * Protobuf enum {@code thermostat.app.Data.Unit}
-   */
-  public enum Unit
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>CELCIUS = 0;</code>
-     */
-    CELCIUS(0),
-    /**
-     * <code>FAHRENHEIT = 1;</code>
-     */
-    FAHRENHEIT(1),
-    UNRECOGNIZED(-1),
-    ;
-
-    /**
-     * <code>CELCIUS = 0;</code>
-     */
-    public static final int CELCIUS_VALUE = 0;
-    /**
-     * <code>FAHRENHEIT = 1;</code>
-     */
-    public static final int FAHRENHEIT_VALUE = 1;
-
-
-    public final int getNumber() {
-      if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
-            "Can't get the number of an unknown enum value.");
-      }
-      return value;
-    }
-
-    /**
-     * @deprecated Use {@link #forNumber(int)} instead.
-     */
-    @java.lang.Deprecated
-    public static Unit valueOf(int value) {
-      return forNumber(value);
-    }
-
-    public static Unit forNumber(int value) {
-      switch (value) {
-        case 0: return CELCIUS;
-        case 1: return FAHRENHEIT;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<Unit>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static final com.google.protobuf.Internal.EnumLiteMap<
-        Unit> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<Unit>() {
-            public Unit findValueByNumber(int number) {
-              return Unit.forNumber(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(ordinal());
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return com.sid.thermostat.app.protobuf.Data.getDescriptor().getEnumTypes().get(0);
-    }
-
-    private static final Unit[] VALUES = values();
-
-    public static Unit valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      if (desc.getIndex() == -1) {
-        return UNRECOGNIZED;
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int value;
-
-    private Unit(int value) {
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:thermostat.app.Data.Unit)
   }
 
   public static final int SERIAL_NO_FIELD_NUMBER = 1;
@@ -248,23 +143,6 @@ private static final long serialVersionUID = 0L;
     return temperature_;
   }
 
-  public static final int UNIT_FIELD_NUMBER = 4;
-  private int unit_;
-  /**
-   * <code>.thermostat.app.Data.Unit unit = 4;</code>
-   */
-  public int getUnitValue() {
-    return unit_;
-  }
-  /**
-   * <code>.thermostat.app.Data.Unit unit = 4;</code>
-   */
-  public com.sid.thermostat.app.protobuf.Data.Unit getUnit() {
-    @SuppressWarnings("deprecation")
-    com.sid.thermostat.app.protobuf.Data.Unit result = com.sid.thermostat.app.protobuf.Data.Unit.valueOf(unit_);
-    return result == null ? com.sid.thermostat.app.protobuf.Data.Unit.UNRECOGNIZED : result;
-  }
-
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -288,9 +166,6 @@ private static final long serialVersionUID = 0L;
     if (temperature_ != 0F) {
       output.writeFloat(3, temperature_);
     }
-    if (unit_ != com.sid.thermostat.app.protobuf.Data.Unit.CELCIUS.getNumber()) {
-      output.writeEnum(4, unit_);
-    }
     unknownFields.writeTo(output);
   }
 
@@ -310,10 +185,6 @@ private static final long serialVersionUID = 0L;
     if (temperature_ != 0F) {
       size += com.google.protobuf.CodedOutputStream
         .computeFloatSize(3, temperature_);
-    }
-    if (unit_ != com.sid.thermostat.app.protobuf.Data.Unit.CELCIUS.getNumber()) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeEnumSize(4, unit_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -337,7 +208,6 @@ private static final long serialVersionUID = 0L;
     if (java.lang.Float.floatToIntBits(getTemperature())
         != java.lang.Float.floatToIntBits(
             other.getTemperature())) return false;
-    if (unit_ != other.unit_) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -357,8 +227,6 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + TEMPERATURE_FIELD_NUMBER;
     hash = (53 * hash) + java.lang.Float.floatToIntBits(
         getTemperature());
-    hash = (37 * hash) + UNIT_FIELD_NUMBER;
-    hash = (53 * hash) + unit_;
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -498,8 +366,6 @@ private static final long serialVersionUID = 0L;
 
       temperature_ = 0F;
 
-      unit_ = 0;
-
       return this;
     }
 
@@ -529,7 +395,6 @@ private static final long serialVersionUID = 0L;
       result.serialNo_ = serialNo_;
       result.deviceTime_ = deviceTime_;
       result.temperature_ = temperature_;
-      result.unit_ = unit_;
       onBuilt();
       return result;
     }
@@ -587,9 +452,6 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getTemperature() != 0F) {
         setTemperature(other.getTemperature());
-      }
-      if (other.unit_ != 0) {
-        setUnitValue(other.getUnitValue());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -737,51 +599,6 @@ private static final long serialVersionUID = 0L;
     public Builder clearTemperature() {
       
       temperature_ = 0F;
-      onChanged();
-      return this;
-    }
-
-    private int unit_ = 0;
-    /**
-     * <code>.thermostat.app.Data.Unit unit = 4;</code>
-     */
-    public int getUnitValue() {
-      return unit_;
-    }
-    /**
-     * <code>.thermostat.app.Data.Unit unit = 4;</code>
-     */
-    public Builder setUnitValue(int value) {
-      unit_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.thermostat.app.Data.Unit unit = 4;</code>
-     */
-    public com.sid.thermostat.app.protobuf.Data.Unit getUnit() {
-      @SuppressWarnings("deprecation")
-      com.sid.thermostat.app.protobuf.Data.Unit result = com.sid.thermostat.app.protobuf.Data.Unit.valueOf(unit_);
-      return result == null ? com.sid.thermostat.app.protobuf.Data.Unit.UNRECOGNIZED : result;
-    }
-    /**
-     * <code>.thermostat.app.Data.Unit unit = 4;</code>
-     */
-    public Builder setUnit(com.sid.thermostat.app.protobuf.Data.Unit value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
-      
-      unit_ = value.getNumber();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.thermostat.app.Data.Unit unit = 4;</code>
-     */
-    public Builder clearUnit() {
-      
-      unit_ = 0;
       onChanged();
       return this;
     }

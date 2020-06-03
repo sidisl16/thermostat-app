@@ -28,12 +28,10 @@ public final class App {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tapp.proto\022\016thermostat.app\"\221\001\n\004Data\022\021\n\t" +
-      "serial_no\030\001 \001(\t\022\023\n\013device_time\030\002 \001(\004\022\023\n\013" +
-      "temperature\030\003 \001(\002\022\'\n\004unit\030\004 \001(\0162\031.thermo" +
-      "stat.app.Data.Unit\"#\n\004Unit\022\013\n\007CELCIUS\020\000\022" +
-      "\016\n\nFAHRENHEIT\020\001B#\n\037com.sid.thermostat.ap" +
-      "p.protobufP\001b\006proto3"
+      "\n\tapp.proto\022\016thermostat.app\"C\n\004Data\022\021\n\ts" +
+      "erial_no\030\001 \001(\t\022\023\n\013device_time\030\002 \001(\004\022\023\n\013t" +
+      "emperature\030\003 \001(\002B#\n\037com.sid.thermostat.a" +
+      "pp.protobufP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -52,7 +50,7 @@ public final class App {
     internal_static_thermostat_app_Data_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_thermostat_app_Data_descriptor,
-        new java.lang.String[] { "SerialNo", "DeviceTime", "Temperature", "Unit", });
+        new java.lang.String[] { "SerialNo", "DeviceTime", "Temperature", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

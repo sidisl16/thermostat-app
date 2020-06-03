@@ -18,7 +18,7 @@ public class DeviceDataObserver implements MessageObserver {
 
 	private static Logger logger = Logger.getLogger(DeviceDataObserver.class.getName());
 	// Define type of data for each topic in proto
-	private static final String DATA_TOPIC_FILTER = "/data/+";
+	private static final String DATA_TOPIC_FILTER = "/inbound/data/+";
 	private static final Class<? extends GeneratedMessageV3> MESSAGE_CLASS = Data.class;
 
 	@Autowired

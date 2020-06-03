@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class DeviceConfigObserver implements MessageObserver {
 
 	private static Logger logger = Logger.getLogger(DeviceConfigObserver.class.getName());
-	private static final String CONFIG_TOPIC_FILTER = "/configuration/777";
+	private static final String CONFIG_TOPIC_FILTER = "/inbound/configuration/+";
 
 	// Used to discard duplicate messages if already present in this Map
 	private Map<String, Integer> lastMessage;

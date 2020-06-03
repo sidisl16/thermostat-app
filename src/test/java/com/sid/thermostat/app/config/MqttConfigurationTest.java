@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -17,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.sid.thermostat.app.ThermostatAppApplication;
 import com.sid.thermostat.app.protobuf.Data;
-import com.sid.thermostat.app.protobuf.Data.Unit;
 
 @SpringBootTest
 @EnableAutoConfiguration
@@ -34,9 +32,8 @@ public class MqttConfigurationTest extends ThermostatAppApplication {
 	@Test
 	public void testTopicPublish() throws MqttPersistenceException, MqttException, InterruptedException {
 		ExecutorService executor = Executors.newSingleThreadExecutor();
-		AtomicInteger counter = new AtomicInteger();
 		Data data = Data.newBuilder().setDeviceTime(System.currentTimeMillis()).setSerialNo("123")
-				.setTemperature(10.23f).setUnit(Unit.CELCIUS).build();
+				.setTemperature(10.23f).build();
 		for (int i = 0; i < 5; i++) {
 			executor.submit(() -> {
 				try {

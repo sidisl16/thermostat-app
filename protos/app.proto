@@ -5,13 +5,8 @@ package thermostat.app;
 option java_multiple_files = true;
 option java_package = "com.sid.thermostat.app.protobuf";
 
-message Data{
-	enum Unit{
-		CELCIUS = 0;
-		FAHRENHEIT = 1;
-	}
+message Data {
 	string serial_no = 1;
 	uint64 device_time = 2;
-	float temperature = 3;
-	Unit unit = 4;	
+	float temperature = 3;	
 }

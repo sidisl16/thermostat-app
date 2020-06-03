@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class DeviceProvisioningObserver implements MessageObserver {
 
 	private static Logger logger = Logger.getLogger(DeviceProvisioningObserver.class.getName());
-	private static final String PROVISIONING_TOPIC_FILTER = "/provisioning/+";
+	private static final String PROVISIONING_TOPIC_FILTER = "/inbound/provisioning/+";
 
 	// Used to discard duplicate messages if already present in this Map
 	private Map<String, Integer> lastMessage;

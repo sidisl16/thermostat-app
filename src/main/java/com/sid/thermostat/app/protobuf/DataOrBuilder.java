@@ -26,13 +26,4 @@ public interface DataOrBuilder extends
    * <code>float temperature = 3;</code>
    */
   float getTemperature();
-
-  /**
-   * <code>.thermostat.app.Data.Unit unit = 4;</code>
-   */
-  int getUnitValue();
-  /**
-   * <code>.thermostat.app.Data.Unit unit = 4;</code>
-   */
-  com.sid.thermostat.app.protobuf.Data.Unit getUnit();
 }

@@ -1,29 +1,89 @@
 package com.sid.thermostat.app.mongo.entites;
 
+import java.util.List;
+
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(value = "device_data")
 public class DeviceData {
 
 	@Id
-	private String id;
+	private ObjectId id;
 
-	private float value;
+	@Field(value = "device_id")
+	private ObjectId device_id;
 
-	public String getId() {
+	@Field(value = "day")
+	private Long day;
+
+	@Field(value = "first")
+	private Long first;
+
+	@Field(value = "last")
+	private Long last;
+
+	@Field(value = "samples")
+	private Integer samples;
+
+	@Field(value = "events")
+	private List<Event> events;
+
+	public ObjectId getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 
-	public float getValue() {
-		return value;
+	public ObjectId getDevice_id() {
+		return device_id;
 	}
 
-	public void setValue(float value) {
-		this.value = value;
+	public void setDevice_id(ObjectId device_id) {
+		this.device_id = device_id;
+	}
+
+	public Long getDay() {
+		return day;
+	}
+
+	public void setDay(Long day) {
+		this.day = day;
+	}
+
+	public Long getFirst() {
+		return first;
+	}
+
+	public void setFirst(Long first) {
+		this.first = first;
+	}
+
+	public Long getLast() {
+		return last;
+	}
+
+	public void setLast(Long last) {
+		this.last = last;
+	}
+
+	public Integer getSamples() {
+		return samples;
+	}
+
+	public void setSamples(Integer samples) {
+		this.samples = samples;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 }
