@@ -38,7 +38,8 @@ public class DeviceDataObserver implements MessageObserver {
 				+ ", QOS" + message.getQos() + "]");
 		// Logic to handle QOS 1 duplicate message
 		if (message.isDuplicate() && lastMessage.containsKey(topic) && lastMessage.get(topic).equals(message.getId())) {
-			logger.log(Level.WARNING, "Duplicate message recieved, discarding message.");
+			logger.log(Level.WARNING,
+					"Duplicate message recieved, discarding message. messageId[" + message.getId() + "]");
 			return;
 		} else {
 			lastMessage.put(topic, message.getId());
@@ -47,7 +48,7 @@ public class DeviceDataObserver implements MessageObserver {
 		try {
 			process(message.getPayload());
 		} catch (Exception e) {
-			logger.log(Level.SEVERE, "Unknown message recieved, messageId[" + message.getId() + "] "+e.getMessage());
+			logger.log(Level.SEVERE, "Unknown message recieved, messageId[" + message.getId() + "] " + e.getMessage());
 		}
 	}
 

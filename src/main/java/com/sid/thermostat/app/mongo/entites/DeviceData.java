@@ -14,7 +14,7 @@ public class DeviceData {
 	private ObjectId id;
 
 	@Field(value = "device_id")
-	private ObjectId device_id;
+	private ObjectId deviceId;
 
 	@Field(value = "day")
 	private Long day;
@@ -39,12 +39,12 @@ public class DeviceData {
 		this.id = id;
 	}
 
-	public ObjectId getDevice_id() {
-		return device_id;
+	public ObjectId getDeviceId() {
+		return deviceId;
 	}
 
-	public void setDevice_id(ObjectId device_id) {
-		this.device_id = device_id;
+	public void setDevice_id(ObjectId deviceId) {
+		this.deviceId = deviceId;
 	}
 
 	public Long getDay() {

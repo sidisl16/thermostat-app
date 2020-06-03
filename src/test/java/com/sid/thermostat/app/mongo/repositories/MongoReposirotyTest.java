@@ -12,19 +12,15 @@ import org.bson.types.ObjectId;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
 
-import com.sid.thermostat.app.ThermostatAppApplication;
+import com.sid.thermostat.app.ThermostatAppApplicationTests;
 import com.sid.thermostat.app.mongo.entites.Config;
 import com.sid.thermostat.app.mongo.entites.Device;
 import com.sid.thermostat.app.mongo.entites.DeviceData;
 import com.sid.thermostat.app.mongo.entites.Event;
 import com.sid.thermostat.app.mongo.entites.Status;
 
-@SpringBootTest
-@EnableAutoConfiguration
-public class MongoReposirotyTest extends ThermostatAppApplication {
+public class MongoReposirotyTest extends ThermostatAppApplicationTests {
 
 	@Autowired
 	private ConfigurationRepository configRepo;

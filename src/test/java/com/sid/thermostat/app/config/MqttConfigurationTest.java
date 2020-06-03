@@ -14,12 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.sid.thermostat.app.ThermostatAppApplication;
+import com.sid.thermostat.app.ThermostatAppApplicationTests;
 import com.sid.thermostat.app.protobuf.Data;
 
-@SpringBootTest
-@EnableAutoConfiguration
-public class MqttConfigurationTest extends ThermostatAppApplication {
+public class MqttConfigurationTest extends ThermostatAppApplicationTests {
 
 	@Autowired
 	private MqttClient mqttClient;
@@ -37,7 +35,7 @@ public class MqttConfigurationTest extends ThermostatAppApplication {
 		for (int i = 0; i < 5; i++) {
 			executor.submit(() -> {
 				try {
-					mqttClient.publish("/data/123", new MqttMessage(data.toByteArray()));
+					mqttClient.publish("/inbound/data/123", new MqttMessage(data.toByteArray()));
 				} catch (MqttException e) {
 					e.printStackTrace();
 				}
