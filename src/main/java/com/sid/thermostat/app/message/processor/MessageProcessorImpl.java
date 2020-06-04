@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 
 import com.google.protobuf.GeneratedMessageV3;
 import com.sid.thermostat.app.protobuf.Data;
+import com.sid.thermostat.app.protobuf.ProvisioningRequest;
 import com.sid.thermostat.app.service.DeviceDataService;
+import com.sid.thermostat.app.service.DeviceService;
 
 @Component
 public class MessageProcessorImpl implements MessageProcessor {
@@ -18,6 +20,9 @@ public class MessageProcessorImpl implements MessageProcessor {
 
 	@Autowired
 	private DeviceDataService deviceDataService;
+
+	@Autowired
+	private DeviceService deviceService;
 
 	@Override
 	public void process(byte[] payload, Class<? extends GeneratedMessageV3> payloadType) throws Exception {
@@ -28,12 +33,17 @@ public class MessageProcessorImpl implements MessageProcessor {
 	}
 
 	private void process(GeneratedMessageV3 message) {
-		
+
 		if (message instanceof Data) {
+
 			Data data = (Data) message;
 			deviceDataService.addDeviceData(data);
-			logger.log(Level.INFO, "Data [Serial no:" + data.getSerialNo() + "]");
-		} 
+
+		} else if (message instanceof ProvisioningRequest) {
+
+			ProvisioningRequest provisioningRequest = (ProvisioningRequest) message;
+			deviceService.provisionDevice(provisioningRequest);
+		}
 	}
 
 }

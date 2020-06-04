@@ -39,7 +39,7 @@ public class DeviceDataObserver implements MessageObserver {
 		// Logic to handle QOS 1 duplicate message
 		if (message.isDuplicate() && lastMessage.containsKey(topic) && lastMessage.get(topic).equals(message.getId())) {
 			logger.log(Level.WARNING,
-					"Duplicate message recieved, discarding message. messageId[" + message.getId() + "]");
+					"Duplicate message recieved, discarding message, messageId[" + message.getId() + "]");
 			return;
 		} else {
 			lastMessage.put(topic, message.getId());

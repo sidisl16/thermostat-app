@@ -10,3 +10,20 @@ message Data {
 	uint64 device_time = 2;
 	float temperature = 3;	
 }
+
+message ProvisioningRequest {
+	string serial_no = 1;
+	string ip_address = 2;	
+}
+
+message ProvisioningResponse {
+	enum prov_status {
+		SUCCESS = 0;
+		FAILED = 1;
+	}
+	string serial_no = 1;
+	string config_topic = 2;
+	string data_topic = 3;
+	prov_status status = 4;
+	int32 qos = 5;
+}
