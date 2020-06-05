@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-import com.sid.thermostat.app.observers.MqttTopicSubject;
+import com.sid.thermostat.app.inbound.message.observers.MqttTopicSubject;
 
 @Configuration
 public class MqttConfiguration {

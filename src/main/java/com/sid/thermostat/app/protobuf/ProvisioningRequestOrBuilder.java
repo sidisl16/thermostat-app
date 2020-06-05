@@ -26,4 +26,14 @@ public interface ProvisioningRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getIpAddressBytes();
+
+  /**
+   * <code>string mac_address = 3;</code>
+   */
+  java.lang.String getMacAddress();
+  /**
+   * <code>string mac_address = 3;</code>
+   */
+  com.google.protobuf.ByteString
+      getMacAddressBytes();
 }

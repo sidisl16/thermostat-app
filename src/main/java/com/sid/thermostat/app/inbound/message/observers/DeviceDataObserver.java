@@ -1,4 +1,4 @@
-package com.sid.thermostat.app.observers;
+package com.sid.thermostat.app.inbound.message.observers;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,23 +12,22 @@ import org.springframework.stereotype.Component;
 import com.google.protobuf.GeneratedMessageV3;
 import com.sid.thermostat.app.message.processor.MessageProcessor;
 import com.sid.thermostat.app.protobuf.Data;
-import com.sid.thermostat.app.protobuf.ProvisioningRequest;
 
 @Component
-public class DeviceProvisioningObserver implements MessageObserver {
+public class DeviceDataObserver implements MessageObserver {
 
-	private static Logger logger = Logger.getLogger(DeviceProvisioningObserver.class.getName());
-	private static final String PROVISIONING_TOPIC_FILTER = "/inbound/provisioning/+";
-	private static final Class<? extends GeneratedMessageV3> MESSAGE_CLASS = ProvisioningRequest.class;
+	private static Logger logger = Logger.getLogger(DeviceDataObserver.class.getName());
+	// Define type of data for each topic in proto
+	private static final String DATA_TOPIC_FILTER = "/inbound/data/+";
+	private static final Class<? extends GeneratedMessageV3> MESSAGE_CLASS = Data.class;
 
+	@Autowired
+	private MessageProcessor messageProcessor;
 	// Used to discard duplicate messages if already present in this Map
 	private Map<String, Integer> lastMessage;
 
 	@Autowired
-	private MessageProcessor messageProcessor;
-
-	@Autowired
-	public DeviceProvisioningObserver(MqttTopicSubject subject) {
+	public DeviceDataObserver(MqttTopicSubject subject) {
 		lastMessage = new ConcurrentHashMap<>();
 		subject.registerObserver(this);
 	}
@@ -40,11 +39,12 @@ public class DeviceProvisioningObserver implements MessageObserver {
 		// Logic to handle QOS 1 duplicate message
 		if (message.isDuplicate() && lastMessage.containsKey(topic) && lastMessage.get(topic).equals(message.getId())) {
 			logger.log(Level.WARNING,
-					"Duplicate message recieved, discarding message. messageId[" + message.getId() + "]");
+					"Duplicate message recieved, discarding message, messageId[" + message.getId() + "]");
 			return;
 		} else {
 			lastMessage.put(topic, message.getId());
 		}
+
 		try {
 			process(message.getPayload());
 		} catch (Exception e) {
@@ -58,6 +58,6 @@ public class DeviceProvisioningObserver implements MessageObserver {
 
 	@Override
 	public String getTopicFilter() {
-		return PROVISIONING_TOPIC_FILTER;
+		return DATA_TOPIC_FILTER;
 	}
 }

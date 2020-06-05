@@ -1,4 +1,4 @@
-package com.sid.thermostat.app.observers;
+package com.sid.thermostat.app.inbound.message.observers;
 
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 

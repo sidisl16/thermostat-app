@@ -7,9 +7,11 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sid.thermostat.app.inbound.message.observers.DeviceDataObserver;
 import com.sid.thermostat.app.mongo.entites.Device;
+import com.sid.thermostat.app.mongo.repositories.ConfigurationRepository;
 import com.sid.thermostat.app.mongo.repositories.DeviceRepository;
-import com.sid.thermostat.app.observers.DeviceDataObserver;
+import com.sid.thermostat.app.outbound.message.template.OutboundMessageTemplate;
 import com.sid.thermostat.app.protobuf.ProvisioningRequest;
 import com.sid.thermostat.app.task.executor.ProvisioningTask;
 import com.sid.thermostat.app.task.executor.TaskManager;
@@ -23,7 +25,13 @@ public class DeviceServiceImpl implements DeviceService {
 	private DeviceRepository deviceRepository;
 
 	@Autowired
+	private ConfigurationRepository configRepository;
+
+	@Autowired
 	private TaskManager taskManager;
+	
+	@Autowired
+	private OutboundMessageTemplate outboundMessagePublisher;
 
 	@Override
 	public void provisionDevice(ProvisioningRequest provisioningRequest) {
@@ -31,8 +39,8 @@ public class DeviceServiceImpl implements DeviceService {
 		if (optionalDevice.isPresent()) {
 			logger.log(Level.WARNING, "Device already provisoned, serialNo[" + optionalDevice.get() + "]");
 		} else {
-			logger.log(Level.INFO, "Provisioning device, serialNo[" + optionalDevice.get() + "]");
-			taskManager.execute(new ProvisioningTask(provisioningRequest));
+			logger.log(Level.INFO, "Provisioning device, serialNo[" + provisioningRequest.getSerialNo() + "]");
+			taskManager.execute(new ProvisioningTask(provisioningRequest, deviceRepository, configRepository, outboundMessagePublisher));
 		}
 	}
 }

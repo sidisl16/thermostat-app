@@ -1,4 +1,4 @@
-package com.sid.thermostat.app.observers;
+package com.sid.thermostat.app.inbound.message.observers;
 
 import java.util.ArrayList;
 import java.util.List;

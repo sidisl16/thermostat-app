@@ -16,23 +16,21 @@ public class TaskManagerImpl implements TaskManager {
 
 	@Autowired
 	public TaskManagerImpl(Environment env) {
-		
+
 		executorService = Executors
 				.newFixedThreadPool(Integer.parseInt(env.getProperty("task.concurrency", DEFAULT_NO_OF_THREADS)));
 	}
 
-	@Override
 	public void execute(AsyncTask task) {
 		executorService.submit(task);
 	}
 
-	@Override
-	public void execute(SyncTask<?> task, ResponseCallback<?> callback) {
-		Future<?> future = executorService.submit(task);
+	public <V> void execute(SyncTask<V> task, ResponseCallback<V> callback) {
+		Future<V> future = executorService.submit(task);
 		addCallback(future, callback, Executors.newCachedThreadPool());
 	}
 
-	private void addCallback(Future<?> future, ResponseCallback callback, ExecutorService newCachedThreadPool) {
+	private <V> void addCallback(Future<V> future, ResponseCallback<V> callback, ExecutorService newCachedThreadPool) {
 		newCachedThreadPool.execute(() -> {
 			try {
 				callback.onSucess(future.get());

@@ -18,6 +18,7 @@ private static final long serialVersionUID = 0L;
   private ProvisioningRequest() {
     serialNo_ = "";
     ipAddress_ = "";
+    macAddress_ = "";
   }
 
   @java.lang.Override
@@ -54,6 +55,12 @@ private static final long serialVersionUID = 0L;
             java.lang.String s = input.readStringRequireUtf8();
 
             ipAddress_ = s;
+            break;
+          }
+          case 26: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            macAddress_ = s;
             break;
           }
           default: {
@@ -156,6 +163,40 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int MAC_ADDRESS_FIELD_NUMBER = 3;
+  private volatile java.lang.Object macAddress_;
+  /**
+   * <code>string mac_address = 3;</code>
+   */
+  public java.lang.String getMacAddress() {
+    java.lang.Object ref = macAddress_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      macAddress_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string mac_address = 3;</code>
+   */
+  public com.google.protobuf.ByteString
+      getMacAddressBytes() {
+    java.lang.Object ref = macAddress_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      macAddress_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -176,6 +217,9 @@ private static final long serialVersionUID = 0L;
     if (!getIpAddressBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, ipAddress_);
     }
+    if (!getMacAddressBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, macAddress_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -190,6 +234,9 @@ private static final long serialVersionUID = 0L;
     }
     if (!getIpAddressBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, ipAddress_);
+    }
+    if (!getMacAddressBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, macAddress_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -210,6 +257,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getSerialNo())) return false;
     if (!getIpAddress()
         .equals(other.getIpAddress())) return false;
+    if (!getMacAddress()
+        .equals(other.getMacAddress())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -225,6 +274,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getSerialNo().hashCode();
     hash = (37 * hash) + IP_ADDRESS_FIELD_NUMBER;
     hash = (53 * hash) + getIpAddress().hashCode();
+    hash = (37 * hash) + MAC_ADDRESS_FIELD_NUMBER;
+    hash = (53 * hash) + getMacAddress().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -362,6 +413,8 @@ private static final long serialVersionUID = 0L;
 
       ipAddress_ = "";
 
+      macAddress_ = "";
+
       return this;
     }
 
@@ -390,6 +443,7 @@ private static final long serialVersionUID = 0L;
       com.sid.thermostat.app.protobuf.ProvisioningRequest result = new com.sid.thermostat.app.protobuf.ProvisioningRequest(this);
       result.serialNo_ = serialNo_;
       result.ipAddress_ = ipAddress_;
+      result.macAddress_ = macAddress_;
       onBuilt();
       return result;
     }
@@ -444,6 +498,10 @@ private static final long serialVersionUID = 0L;
       }
       if (!other.getIpAddress().isEmpty()) {
         ipAddress_ = other.ipAddress_;
+        onChanged();
+      }
+      if (!other.getMacAddress().isEmpty()) {
+        macAddress_ = other.macAddress_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -609,6 +667,75 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       ipAddress_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object macAddress_ = "";
+    /**
+     * <code>string mac_address = 3;</code>
+     */
+    public java.lang.String getMacAddress() {
+      java.lang.Object ref = macAddress_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        macAddress_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string mac_address = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMacAddressBytes() {
+      java.lang.Object ref = macAddress_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        macAddress_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string mac_address = 3;</code>
+     */
+    public Builder setMacAddress(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      macAddress_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string mac_address = 3;</code>
+     */
+    public Builder clearMacAddress() {
+      
+      macAddress_ = getDefaultInstance().getMacAddress();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string mac_address = 3;</code>
+     */
+    public Builder setMacAddressBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      macAddress_ = value;
       onChanged();
       return this;
     }

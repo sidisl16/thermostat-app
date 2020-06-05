@@ -108,9 +108,9 @@ private static final long serialVersionUID = 0L;
   }
 
   /**
-   * Protobuf enum {@code thermostat.app.ProvisioningResponse.prov_status}
+   * Protobuf enum {@code thermostat.app.ProvisioningResponse.ProvStatus}
    */
-  public enum prov_status
+  public enum ProvStatus
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
      * <code>SUCCESS = 0;</code>
@@ -145,11 +145,11 @@ private static final long serialVersionUID = 0L;
      * @deprecated Use {@link #forNumber(int)} instead.
      */
     @java.lang.Deprecated
-    public static prov_status valueOf(int value) {
+    public static ProvStatus valueOf(int value) {
       return forNumber(value);
     }
 
-    public static prov_status forNumber(int value) {
+    public static ProvStatus forNumber(int value) {
       switch (value) {
         case 0: return SUCCESS;
         case 1: return FAILED;
@@ -157,15 +157,15 @@ private static final long serialVersionUID = 0L;
       }
     }
 
-    public static com.google.protobuf.Internal.EnumLiteMap<prov_status>
+    public static com.google.protobuf.Internal.EnumLiteMap<ProvStatus>
         internalGetValueMap() {
       return internalValueMap;
     }
     private static final com.google.protobuf.Internal.EnumLiteMap<
-        prov_status> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<prov_status>() {
-            public prov_status findValueByNumber(int number) {
-              return prov_status.forNumber(number);
+        ProvStatus> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<ProvStatus>() {
+            public ProvStatus findValueByNumber(int number) {
+              return ProvStatus.forNumber(number);
             }
           };
 
@@ -182,9 +182,9 @@ private static final long serialVersionUID = 0L;
       return com.sid.thermostat.app.protobuf.ProvisioningResponse.getDescriptor().getEnumTypes().get(0);
     }
 
-    private static final prov_status[] VALUES = values();
+    private static final ProvStatus[] VALUES = values();
 
-    public static prov_status valueOf(
+    public static ProvStatus valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
@@ -198,11 +198,11 @@ private static final long serialVersionUID = 0L;
 
     private final int value;
 
-    private prov_status(int value) {
+    private ProvStatus(int value) {
       this.value = value;
     }
 
-    // @@protoc_insertion_point(enum_scope:thermostat.app.ProvisioningResponse.prov_status)
+    // @@protoc_insertion_point(enum_scope:thermostat.app.ProvisioningResponse.ProvStatus)
   }
 
   public static final int SERIAL_NO_FIELD_NUMBER = 1;
@@ -310,18 +310,18 @@ private static final long serialVersionUID = 0L;
   public static final int STATUS_FIELD_NUMBER = 4;
   private int status_;
   /**
-   * <code>.thermostat.app.ProvisioningResponse.prov_status status = 4;</code>
+   * <code>.thermostat.app.ProvisioningResponse.ProvStatus status = 4;</code>
    */
   public int getStatusValue() {
     return status_;
   }
   /**
-   * <code>.thermostat.app.ProvisioningResponse.prov_status status = 4;</code>
+   * <code>.thermostat.app.ProvisioningResponse.ProvStatus status = 4;</code>
    */
-  public com.sid.thermostat.app.protobuf.ProvisioningResponse.prov_status getStatus() {
+  public com.sid.thermostat.app.protobuf.ProvisioningResponse.ProvStatus getStatus() {
     @SuppressWarnings("deprecation")
-    com.sid.thermostat.app.protobuf.ProvisioningResponse.prov_status result = com.sid.thermostat.app.protobuf.ProvisioningResponse.prov_status.valueOf(status_);
-    return result == null ? com.sid.thermostat.app.protobuf.ProvisioningResponse.prov_status.UNRECOGNIZED : result;
+    com.sid.thermostat.app.protobuf.ProvisioningResponse.ProvStatus result = com.sid.thermostat.app.protobuf.ProvisioningResponse.ProvStatus.valueOf(status_);
+    return result == null ? com.sid.thermostat.app.protobuf.ProvisioningResponse.ProvStatus.UNRECOGNIZED : result;
   }
 
   public static final int QOS_FIELD_NUMBER = 5;
@@ -356,7 +356,7 @@ private static final long serialVersionUID = 0L;
     if (!getDataTopicBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, dataTopic_);
     }
-    if (status_ != com.sid.thermostat.app.protobuf.ProvisioningResponse.prov_status.SUCCESS.getNumber()) {
+    if (status_ != com.sid.thermostat.app.protobuf.ProvisioningResponse.ProvStatus.SUCCESS.getNumber()) {
       output.writeEnum(4, status_);
     }
     if (qos_ != 0) {
@@ -380,7 +380,7 @@ private static final long serialVersionUID = 0L;
     if (!getDataTopicBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, dataTopic_);
     }
-    if (status_ != com.sid.thermostat.app.protobuf.ProvisioningResponse.prov_status.SUCCESS.getNumber()) {
+    if (status_ != com.sid.thermostat.app.protobuf.ProvisioningResponse.ProvStatus.SUCCESS.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(4, status_);
     }
@@ -911,13 +911,13 @@ private static final long serialVersionUID = 0L;
 
     private int status_ = 0;
     /**
-     * <code>.thermostat.app.ProvisioningResponse.prov_status status = 4;</code>
+     * <code>.thermostat.app.ProvisioningResponse.ProvStatus status = 4;</code>
      */
     public int getStatusValue() {
       return status_;
     }
     /**
-     * <code>.thermostat.app.ProvisioningResponse.prov_status status = 4;</code>
+     * <code>.thermostat.app.ProvisioningResponse.ProvStatus status = 4;</code>
      */
     public Builder setStatusValue(int value) {
       status_ = value;
@@ -925,17 +925,17 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.thermostat.app.ProvisioningResponse.prov_status status = 4;</code>
+     * <code>.thermostat.app.ProvisioningResponse.ProvStatus status = 4;</code>
      */
-    public com.sid.thermostat.app.protobuf.ProvisioningResponse.prov_status getStatus() {
+    public com.sid.thermostat.app.protobuf.ProvisioningResponse.ProvStatus getStatus() {
       @SuppressWarnings("deprecation")
-      com.sid.thermostat.app.protobuf.ProvisioningResponse.prov_status result = com.sid.thermostat.app.protobuf.ProvisioningResponse.prov_status.valueOf(status_);
-      return result == null ? com.sid.thermostat.app.protobuf.ProvisioningResponse.prov_status.UNRECOGNIZED : result;
+      com.sid.thermostat.app.protobuf.ProvisioningResponse.ProvStatus result = com.sid.thermostat.app.protobuf.ProvisioningResponse.ProvStatus.valueOf(status_);
+      return result == null ? com.sid.thermostat.app.protobuf.ProvisioningResponse.ProvStatus.UNRECOGNIZED : result;
     }
     /**
-     * <code>.thermostat.app.ProvisioningResponse.prov_status status = 4;</code>
+     * <code>.thermostat.app.ProvisioningResponse.ProvStatus status = 4;</code>
      */
-    public Builder setStatus(com.sid.thermostat.app.protobuf.ProvisioningResponse.prov_status value) {
+    public Builder setStatus(com.sid.thermostat.app.protobuf.ProvisioningResponse.ProvStatus value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -945,7 +945,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.thermostat.app.ProvisioningResponse.prov_status status = 4;</code>
+     * <code>.thermostat.app.ProvisioningResponse.ProvStatus status = 4;</code>
      */
     public Builder clearStatus() {
       

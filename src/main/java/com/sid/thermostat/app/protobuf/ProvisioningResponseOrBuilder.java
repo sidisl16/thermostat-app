@@ -38,13 +38,13 @@ public interface ProvisioningResponseOrBuilder extends
       getDataTopicBytes();
 
   /**
-   * <code>.thermostat.app.ProvisioningResponse.prov_status status = 4;</code>
+   * <code>.thermostat.app.ProvisioningResponse.ProvStatus status = 4;</code>
    */
   int getStatusValue();
   /**
-   * <code>.thermostat.app.ProvisioningResponse.prov_status status = 4;</code>
+   * <code>.thermostat.app.ProvisioningResponse.ProvStatus status = 4;</code>
    */
-  com.sid.thermostat.app.protobuf.ProvisioningResponse.prov_status getStatus();
+  com.sid.thermostat.app.protobuf.ProvisioningResponse.ProvStatus getStatus();
 
   /**
    * <code>int32 qos = 5;</code>

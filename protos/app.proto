@@ -14,16 +14,17 @@ message Data {
 message ProvisioningRequest {
 	string serial_no = 1;
 	string ip_address = 2;	
+	string mac_address = 3;
 }
 
 message ProvisioningResponse {
-	enum prov_status {
+	enum ProvStatus {
 		SUCCESS = 0;
 		FAILED = 1;
 	}
 	string serial_no = 1;
 	string config_topic = 2;
 	string data_topic = 3;
-	prov_status status = 4;
+	ProvStatus status = 4;
 	int32 qos = 5;
 }

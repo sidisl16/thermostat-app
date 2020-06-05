@@ -7,5 +7,5 @@ public interface TaskManager {
 
 	public void execute(AsyncTask task);
 
-	void execute(SyncTask<?> task, ResponseCallback<?> callBack);
+	public <V> void execute(SyncTask<V> task, ResponseCallback<V> callback);
 }
