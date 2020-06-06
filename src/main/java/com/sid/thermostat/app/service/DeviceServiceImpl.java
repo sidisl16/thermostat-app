@@ -29,18 +29,22 @@ public class DeviceServiceImpl implements DeviceService {
 
 	@Autowired
 	private TaskManager taskManager;
-	
+
 	@Autowired
 	private OutboundMessageTemplate outboundMessagePublisher;
+
+	@Autowired
+	private ProvisioningTask provisioningTask;
 
 	@Override
 	public void provisionDevice(ProvisioningRequest provisioningRequest) {
 		Optional<Device> optionalDevice = deviceRepository.findBySerialNo(provisioningRequest.getSerialNo());
 		if (optionalDevice.isPresent()) {
-			logger.log(Level.WARNING, "Device already provisoned, serialNo[" + optionalDevice.get() + "]");
+			logger.log(Level.WARNING, "Device is already provisoned, serialNo[" + optionalDevice.get() + "]");
 		} else {
 			logger.log(Level.INFO, "Provisioning device, serialNo[" + provisioningRequest.getSerialNo() + "]");
-			taskManager.execute(new ProvisioningTask(provisioningRequest, deviceRepository, configRepository, outboundMessagePublisher));
+			provisioningTask.setRequest(provisioningRequest);
+			taskManager.execute(provisioningTask);
 		}
 	}
 }

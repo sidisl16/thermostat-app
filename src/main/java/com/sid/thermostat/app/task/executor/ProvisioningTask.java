@@ -3,6 +3,10 @@ package com.sid.thermostat.app.task.executor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import com.sid.thermostat.app.mongo.entites.Config;
 import com.sid.thermostat.app.mongo.entites.Device;
 import com.sid.thermostat.app.mongo.entites.Status;
@@ -14,6 +18,8 @@ import com.sid.thermostat.app.protobuf.ProvisioningRequest;
 import com.sid.thermostat.app.protobuf.ProvisioningResponse;
 import com.sid.thermostat.app.protobuf.ProvisioningResponse.ProvStatus;
 
+@Component
+@Scope(value = "prototype")
 public class ProvisioningTask extends AsyncTask {
 
 	private static Logger logger = Logger.getLogger(ProvisioningTask.class.getName());
@@ -30,9 +36,17 @@ public class ProvisioningTask extends AsyncTask {
 
 	private OutboundMessageTemplate outboundMessagePublisher;
 
-	public ProvisioningTask(ProvisioningRequest request, DeviceRepository deviceRepository,
-			ConfigurationRepository configRepository, OutboundMessageTemplate outboundMessagePublisher) {
+	public ProvisioningRequest getRequest() {
+		return request;
+	}
+
+	public void setRequest(ProvisioningRequest request) {
 		this.request = request;
+	}
+
+	@Autowired
+	public ProvisioningTask(DeviceRepository deviceRepository, ConfigurationRepository configRepository,
+			OutboundMessageTemplate outboundMessagePublisher) {
 		this.deviceRepository = deviceRepository;
 		this.configRepository = configRepository;
 		this.outboundMessagePublisher = outboundMessagePublisher;
@@ -54,7 +68,8 @@ public class ProvisioningTask extends AsyncTask {
 	private void sendOutboundMessage(Device device, Config config) {
 		ProvisioningResponse response = getProvisioningResponseObject(device, config);
 		PublishRequest request = PublishRequest.newBuilder().setPayload(response.toByteArray()).setQos(1)
-				.setRetain(true).setTopic(DEFAULT_PROVISIONING_TOPIC_PATTERN).build();
+				.setRetain(true).setTopic(String.format(DEFAULT_PROVISIONING_TOPIC_PATTERN, device.getSerialNo()))
+				.build();
 		getOutboundPublisher().publish(request);
 		logger.log(Level.INFO,
 				"Provisioning response for device, serial no +[" + device.getSerialNo() + "] published successfully.");

@@ -1,7 +1,7 @@
 package com.sid.thermostat.app.config;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -30,27 +30,23 @@ public class MqttConfigurationTest extends ThermostatAppApplicationTests {
 
 	@Test
 	public void testProvisioningPublish() throws MqttPersistenceException, MqttException, InterruptedException {
-		ExecutorService executor = Executors.newSingleThreadExecutor();
-		ProvisioningRequest provisioningRequest = ProvisioningRequest.newBuilder().setSerialNo("SERIAL4567")
-				.setIpAddress("192.168.255.2").build();
-		for (int i = 0; i < 1; i++) {
-			executor.submit(() -> {
-				try {
-					mqttClient.publish("/inbound/provisioning/SERIAL4567",
-							new MqttMessage(provisioningRequest.toByteArray()));
-				} catch (MqttException e) {
-					e.printStackTrace();
-				}
-			});
-		}
-		mqttClient.subscribe("/outbound/provisioning/SERIAL4567", new IMqttMessageListener() {
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		ProvisioningRequest provisioningRequest = ProvisioningRequest.newBuilder().setSerialNo("SERIAL456790")
+				.setMacAddress("AC:DC:FS:22:34:4F").setIpAddress("192.168.255.2").build();
+		mqttClient.subscribe("/outbound/provisioning/SERIAL456790", 0, new IMqttMessageListener() {
 			@Override
 			public void messageArrived(String topic, MqttMessage message) throws Exception {
 				ProvisioningResponse response = ProvisioningResponse.parseFrom(message.getPayload());
-				 assertEquals("/inbound/configuration/SERIAL4567", response.getConfigTopic()	);
+				System.out.println(">>>>>>>>>>>>>>>>>>" + response.getConfigTopic());
+				assertEquals("/inbound/configuration/SERIAL456790", response.getConfigTopic());
 			}
 		});
-		Thread.sleep(10000);
-		executor.shutdown();
+		try {
+			mqttClient.publish("/inbound/provisioning/SERIAL456790",
+					new MqttMessage(provisioningRequest.toByteArray()));
+		} catch (MqttException e) {
+			e.printStackTrace();
+		}
+		Thread.sleep(30000);
 	}
 }
