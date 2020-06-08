@@ -28,3 +28,24 @@ message ProvisioningResponse {
 	ProvStatus status = 4;
 	int32 qos = 5;
 }
+
+message ConfigurationRequest {
+	string requestId = 1;
+	string config_topic = 2;
+	string data_topic = 3;
+	int32 data_interval = 4;
+}
+
+message ConfigurationResponse {
+	enum ConfigStatus {
+		SUCCESS = 0;
+		FAILED = 1;
+	}
+	string requestId = 1;
+	string serial_no = 2;
+	ConfigStatus status = 3;
+}
+
+
+
+

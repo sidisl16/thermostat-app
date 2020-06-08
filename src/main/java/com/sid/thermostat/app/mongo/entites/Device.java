@@ -21,7 +21,7 @@ public class Device {
 	@Field(value = "mac_address")
 	private String macAddress;
 
-	@DBRef
+	@DBRef(lazy = true)
 	private Config config;
 
 	public ObjectId getId() {

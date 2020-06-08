@@ -12,7 +12,7 @@ public abstract class OutboundMessageTemplate {
 	protected MqttClient mqttClient;
 
 	public void execute(PublishRequest request) {
-		executorService.execute(() -> {
+		executorService.submit(() -> {
 			try {
 				mqttClient.publish(request.getTopic(), request.getPayload(), request.getQos(), request.isRetain());
 			} catch (MqttException e) {

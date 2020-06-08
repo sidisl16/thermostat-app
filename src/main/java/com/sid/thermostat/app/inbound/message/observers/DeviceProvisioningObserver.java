@@ -34,7 +34,6 @@ public class DeviceProvisioningObserver implements MessageObserver {
 
 	@Override
 	public void messageArrived(String topic, MqttMessage message) throws Exception {
-		System.out.println(">>>>>>>>>>>>>" + new String(message.getPayload()));
 		logger.log(Level.INFO, "Message recieved, message[id:" + message.getId() + ", isDup:" + message.isDuplicate()
 				+ ", QOS" + message.getQos() + "]");
 		// Logic to handle QOS 1 duplicate message

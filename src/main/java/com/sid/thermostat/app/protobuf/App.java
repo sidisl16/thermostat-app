@@ -29,6 +29,16 @@ public final class App {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_thermostat_app_ProvisioningResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_thermostat_app_ConfigurationRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_thermostat_app_ConfigurationRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_thermostat_app_ConfigurationResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_thermostat_app_ConfigurationResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -47,8 +57,15 @@ public final class App {
       "\002 \001(\t\022\022\n\ndata_topic\030\003 \001(\t\022?\n\006status\030\004 \001(" +
       "\0162/.thermostat.app.ProvisioningResponse." +
       "ProvStatus\022\013\n\003qos\030\005 \001(\005\"%\n\nProvStatus\022\013\n" +
-      "\007SUCCESS\020\000\022\n\n\006FAILED\020\001B#\n\037com.sid.thermo" +
-      "stat.app.protobufP\001b\006proto3"
+      "\007SUCCESS\020\000\022\n\n\006FAILED\020\001\"j\n\024ConfigurationR" +
+      "equest\022\021\n\trequestId\030\001 \001(\t\022\024\n\014config_topi" +
+      "c\030\002 \001(\t\022\022\n\ndata_topic\030\003 \001(\t\022\025\n\rdata_inte" +
+      "rval\030\004 \001(\005\"\252\001\n\025ConfigurationResponse\022\021\n\t" +
+      "requestId\030\001 \001(\t\022\021\n\tserial_no\030\002 \001(\t\022B\n\006st" +
+      "atus\030\003 \001(\01622.thermostat.app.Configuratio" +
+      "nResponse.ConfigStatus\"\'\n\014ConfigStatus\022\013" +
+      "\n\007SUCCESS\020\000\022\n\n\006FAILED\020\001B#\n\037com.sid.therm" +
+      "ostat.app.protobufP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -80,6 +97,18 @@ public final class App {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_thermostat_app_ProvisioningResponse_descriptor,
         new java.lang.String[] { "SerialNo", "ConfigTopic", "DataTopic", "Status", "Qos", });
+    internal_static_thermostat_app_ConfigurationRequest_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_thermostat_app_ConfigurationRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_thermostat_app_ConfigurationRequest_descriptor,
+        new java.lang.String[] { "RequestId", "ConfigTopic", "DataTopic", "DataInterval", });
+    internal_static_thermostat_app_ConfigurationResponse_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_thermostat_app_ConfigurationResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_thermostat_app_ConfigurationResponse_descriptor,
+        new java.lang.String[] { "RequestId", "SerialNo", "Status", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

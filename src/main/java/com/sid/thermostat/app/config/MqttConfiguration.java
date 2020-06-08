@@ -45,11 +45,12 @@ public class MqttConfiguration {
 			if (mqttClient.isConnected()) {
 				logger.log(Level.INFO, "Mqtt Client[" + clientId + "] connected to Server[" + serverURI + "]");
 			}
+			suscribeTopics(mqttClient);
 		} catch (MqttException e) {
 			logger.log(Level.SEVERE, "Mqtt Client[" + clientId + "] failed to connect Server[" + serverURI
 					+ "], reason [" + e.getMessage() + "]");
+			throw e;
 		}
-		suscribeTopics(mqttClient);
 		return mqttClient;
 	}
 

@@ -30,14 +30,12 @@ public class MqttConfigurationTest extends ThermostatAppApplicationTests {
 
 	@Test
 	public void testProvisioningPublish() throws MqttPersistenceException, MqttException, InterruptedException {
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		ProvisioningRequest provisioningRequest = ProvisioningRequest.newBuilder().setSerialNo("SERIAL456790")
 				.setMacAddress("AC:DC:FS:22:34:4F").setIpAddress("192.168.255.2").build();
 		mqttClient.subscribe("/outbound/provisioning/SERIAL456790", 0, new IMqttMessageListener() {
 			@Override
 			public void messageArrived(String topic, MqttMessage message) throws Exception {
 				ProvisioningResponse response = ProvisioningResponse.parseFrom(message.getPayload());
-				System.out.println(">>>>>>>>>>>>>>>>>>" + response.getConfigTopic());
 				assertEquals("/inbound/configuration/SERIAL456790", response.getConfigTopic());
 			}
 		});
@@ -47,6 +45,6 @@ public class MqttConfigurationTest extends ThermostatAppApplicationTests {
 		} catch (MqttException e) {
 			e.printStackTrace();
 		}
-		Thread.sleep(30000);
+		Thread.sleep(10000);
 	}
 }
