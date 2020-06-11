@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.protobuf.GeneratedMessageV3;
+import com.sid.thermostat.app.protobuf.ConfigurationResponse;
 import com.sid.thermostat.app.protobuf.Data;
 import com.sid.thermostat.app.protobuf.ProvisioningRequest;
+import com.sid.thermostat.app.service.ConfigurationService;
 import com.sid.thermostat.app.service.DeviceDataService;
 import com.sid.thermostat.app.service.DeviceService;
+import com.sid.thermostat.app.task.executor.RequestCache;
 
 @Component
 public class MessageProcessorImpl implements MessageProcessor {
@@ -19,6 +22,9 @@ public class MessageProcessorImpl implements MessageProcessor {
 
 	@Autowired
 	private DeviceDataService deviceDataService;
+	
+	@Autowired
+	private ConfigurationService configurationService;
 
 	@Autowired
 	private DeviceService deviceService;
@@ -42,8 +48,14 @@ public class MessageProcessorImpl implements MessageProcessor {
 
 			ProvisioningRequest provisioningRequest = (ProvisioningRequest) message;
 			deviceService.provisionDevice(provisioningRequest);
+
+		} else if (message instanceof ConfigurationResponse) {
+
+			ConfigurationResponse configResponse = (ConfigurationResponse) message;
+			configurationService.processConfigurationResponse(configResponse, RequestCache.INSTANCE);
+
 		}
-		
+
 	}
 
 }

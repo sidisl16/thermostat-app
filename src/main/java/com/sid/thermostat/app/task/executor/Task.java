@@ -5,9 +5,9 @@ import java.util.concurrent.Callable;
 public interface Task<V> extends Callable<V> {
 
 	@Override
-	default V call() {
+	default V call() throws Exception {
 		return defineTask();
 	}
 
-	public V defineTask();
+	public V defineTask() throws InterruptedException;
 }

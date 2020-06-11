@@ -30,6 +30,9 @@ public class Config {
 	@Field(value = "last_modified")
 	private Long lastModified;
 
+	@Field(value = "new_config")
+	private Config newConfig;
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -92,5 +95,13 @@ public class Config {
 
 	public void setLastModified(Long lastModified) {
 		this.lastModified = lastModified;
+	}
+
+	public Config getNewConfig() {
+		return newConfig;
+	}
+
+	public void setNewConfig(Config newConfig) {
+		this.newConfig = newConfig;
 	}
 }

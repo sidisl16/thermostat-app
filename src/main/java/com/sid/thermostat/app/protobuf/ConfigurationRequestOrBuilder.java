@@ -41,4 +41,14 @@ public interface ConfigurationRequestOrBuilder extends
    * <code>int32 data_interval = 4;</code>
    */
   int getDataInterval();
+
+  /**
+   * <code>string serial_no = 5;</code>
+   */
+  java.lang.String getSerialNo();
+  /**
+   * <code>string serial_no = 5;</code>
+   */
+  com.google.protobuf.ByteString
+      getSerialNoBytes();
 }

@@ -19,6 +19,7 @@ private static final long serialVersionUID = 0L;
     requestId_ = "";
     configTopic_ = "";
     dataTopic_ = "";
+    serialNo_ = "";
   }
 
   @java.lang.Override
@@ -66,6 +67,12 @@ private static final long serialVersionUID = 0L;
           case 32: {
 
             dataInterval_ = input.readInt32();
+            break;
+          }
+          case 42: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            serialNo_ = s;
             break;
           }
           default: {
@@ -211,6 +218,40 @@ private static final long serialVersionUID = 0L;
     return dataInterval_;
   }
 
+  public static final int SERIAL_NO_FIELD_NUMBER = 5;
+  private volatile java.lang.Object serialNo_;
+  /**
+   * <code>string serial_no = 5;</code>
+   */
+  public java.lang.String getSerialNo() {
+    java.lang.Object ref = serialNo_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      serialNo_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string serial_no = 5;</code>
+   */
+  public com.google.protobuf.ByteString
+      getSerialNoBytes() {
+    java.lang.Object ref = serialNo_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      serialNo_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -237,6 +278,9 @@ private static final long serialVersionUID = 0L;
     if (dataInterval_ != 0) {
       output.writeInt32(4, dataInterval_);
     }
+    if (!getSerialNoBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, serialNo_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -258,6 +302,9 @@ private static final long serialVersionUID = 0L;
     if (dataInterval_ != 0) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(4, dataInterval_);
+    }
+    if (!getSerialNoBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, serialNo_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -282,6 +329,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getDataTopic())) return false;
     if (getDataInterval()
         != other.getDataInterval()) return false;
+    if (!getSerialNo()
+        .equals(other.getSerialNo())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -301,6 +350,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getDataTopic().hashCode();
     hash = (37 * hash) + DATA_INTERVAL_FIELD_NUMBER;
     hash = (53 * hash) + getDataInterval();
+    hash = (37 * hash) + SERIAL_NO_FIELD_NUMBER;
+    hash = (53 * hash) + getSerialNo().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -442,6 +493,8 @@ private static final long serialVersionUID = 0L;
 
       dataInterval_ = 0;
 
+      serialNo_ = "";
+
       return this;
     }
 
@@ -472,6 +525,7 @@ private static final long serialVersionUID = 0L;
       result.configTopic_ = configTopic_;
       result.dataTopic_ = dataTopic_;
       result.dataInterval_ = dataInterval_;
+      result.serialNo_ = serialNo_;
       onBuilt();
       return result;
     }
@@ -534,6 +588,10 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getDataInterval() != 0) {
         setDataInterval(other.getDataInterval());
+      }
+      if (!other.getSerialNo().isEmpty()) {
+        serialNo_ = other.serialNo_;
+        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -793,6 +851,75 @@ private static final long serialVersionUID = 0L;
     public Builder clearDataInterval() {
       
       dataInterval_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object serialNo_ = "";
+    /**
+     * <code>string serial_no = 5;</code>
+     */
+    public java.lang.String getSerialNo() {
+      java.lang.Object ref = serialNo_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        serialNo_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string serial_no = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSerialNoBytes() {
+      java.lang.Object ref = serialNo_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        serialNo_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string serial_no = 5;</code>
+     */
+    public Builder setSerialNo(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      serialNo_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string serial_no = 5;</code>
+     */
+    public Builder clearSerialNo() {
+      
+      serialNo_ = getDefaultInstance().getSerialNo();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string serial_no = 5;</code>
+     */
+    public Builder setSerialNoBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      serialNo_ = value;
       onChanged();
       return this;
     }

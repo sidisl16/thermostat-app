@@ -34,6 +34,7 @@ message ConfigurationRequest {
 	string config_topic = 2;
 	string data_topic = 3;
 	int32 data_interval = 4;
+	string serial_no = 5;
 }
 
 message ConfigurationResponse {

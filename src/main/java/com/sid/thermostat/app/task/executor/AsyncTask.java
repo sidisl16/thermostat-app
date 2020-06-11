@@ -3,7 +3,7 @@ package com.sid.thermostat.app.task.executor;
 public abstract class AsyncTask implements Task<Void> {
 
 	@Override
-	public Void defineTask() {
+	public Void defineTask() throws InterruptedException {
 		defineAsyncTask();
 		return null;
 	}
