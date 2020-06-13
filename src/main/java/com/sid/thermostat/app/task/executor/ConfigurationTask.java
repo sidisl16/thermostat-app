@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.google.protobuf.GeneratedMessageV3;
 import com.sid.thermostat.app.mongo.dal.ConfigurationDAL;
 import com.sid.thermostat.app.mongo.entites.Config;
 import com.sid.thermostat.app.mongo.entites.Status;
@@ -56,7 +57,7 @@ public class ConfigurationTask extends SyncTask<ConfigurationResponse> {
 		int retryAttempt = 1;
 		do {
 			try {
-				getRequestCache().put(configurationRequest.getRequestId(), new SynchronousQueue<ConfigurationResponse>());
+				getRequestCache().put(configurationRequest.getRequestId(), new SynchronousQueue<GeneratedMessageV3>());
 				getOutboundMessageTemplate().publish(getPublishRequest(configurationRequest, config));
 				response = (ConfigurationResponse) getRequestCache().get(configurationRequest.getRequestId())
 						.poll(DEFAULT_RESPONSE_TIMEOUT_SECS, TimeUnit.SECONDS);
@@ -65,8 +66,14 @@ public class ConfigurationTask extends SyncTask<ConfigurationResponse> {
 				retryAttempt++;
 				config.getNewConfig().setRetryAttempt(retryAttempt);
 				configRepository.save(config);
-				if (retryAttempt == DEFAULT_MAX_RETRY)
+				if (retryAttempt == DEFAULT_MAX_RETRY) {
+					logger.log(Level.INFO, "configuration reached maximum retry count, serial no ["
+							+ configurationRequest.getSerialNo() + "]");
+					logger.log(Level.FINE, "configuration reached maximum retry count, removing request id ["
+							+ configurationRequest.getRequestId() + "] from request cache.");
+					getRequestCache().remove(configurationRequest.getRequestId());
 					throw e;
+				}
 			}
 		} while (retryAttempt <= DEFAULT_MAX_RETRY);
 		return response;

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sid.thermostat.app.ThermostatAppApplicationTests;
-import com.sid.thermostat.app.mongo.repositories.DeviceRepository;
 
 public class TaskManagerTest extends ThermostatAppApplicationTests {
 

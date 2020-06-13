@@ -2,7 +2,6 @@ package com.sid.thermostat.app.service;
 
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.SynchronousQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import com.google.protobuf.GeneratedMessageV3;
 import com.sid.thermostat.app.dto.ConfigDto;
 import com.sid.thermostat.app.exceptions.RestException;
 import com.sid.thermostat.app.mongo.dal.ConfigurationDAL;
@@ -53,7 +51,12 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		Optional<Config> config = configurationDAL.getConfigBySerialNo(serialNo);
 		ConfigDto configDto = new ConfigDto();
 		if (config.isPresent()) {
-			configDto = EntityAndDtoConversionUtil.convert(config.get(), ConfigDto.class);
+			if (config.get().getNewConfig() != null && (config.get().getNewConfig().getStatus() != Status.COMPLETED
+					|| config.get().getNewConfig().getStatus() != Status.FAILED)) {
+				configDto = EntityAndDtoConversionUtil.convert(config.get().getNewConfig(), ConfigDto.class);
+			} else {
+				configDto = EntityAndDtoConversionUtil.convert(config.get(), ConfigDto.class);
+			}
 		} else {
 			throw new RestException(HttpStatus.NOT_FOUND, "config not found.");
 		}
@@ -70,8 +73,8 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		logger.log(Level.INFO, "Executing configuration for device, serialNo [" + serialNo + "]");
 		ConfigurationRequest configRequest = getConfigurationRequest(config, serialNo);
 		configurationTask.setConfigurationRequest(configRequest);
-		excecuteConfiguration(serialNo);
 		optionalConfig = configurationDAL.getConfigBySerialNo(serialNo);
+		excecuteConfiguration(serialNo);
 		return EntityAndDtoConversionUtil.convert(optionalConfig.get().getNewConfig(), ConfigDto.class);
 	}
 
@@ -166,12 +169,21 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 
 	@Override
 	public void processConfigurationResponse(ConfigurationResponse configResponse, RequestCache requestCache) {
-		logger.log(Level.INFO,
-				"Processing configuration response for serial no [" + configResponse.getSerialNo() + "]");
+		logger.log(Level.INFO, "Processing configuration response for serial no [" + configResponse.getSerialNo()
+				+ "], request id[" + configResponse.getRequestId() + "]");
 		if (requestCache.containsKey(configResponse.getRequestId())) {
-			requestCache.get(configResponse.getRequestId());
+			try {
+				requestCache.get(configResponse.getRequestId()).put(configResponse);
+				requestCache.remove(configResponse.getRequestId());
+			} catch (InterruptedException e) {
+				logger.log(Level.FINE,
+						"Removing request id[" + configResponse.getRequestId() + "] from request cache.");
+				requestCache.remove(configResponse.getRequestId());
+				e.printStackTrace();
+			}
 		} else {
-			
+			logger.log(Level.WARNING, "Discarding message, request  configuration response for serial no ["
+					+ configResponse.getSerialNo() + "], request id[" + configResponse.getRequestId() + "]");
 		}
 	}
 }
