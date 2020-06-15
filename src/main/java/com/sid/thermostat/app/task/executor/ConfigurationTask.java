@@ -80,7 +80,7 @@ public class ConfigurationTask extends SyncTask<ConfigurationResponse> {
 	}
 
 	private PublishRequest getPublishRequest(ConfigurationRequest configRequest, Config config) {
-		return PublishRequest.newBuilder().setPayload(configRequest.toByteArray()).setTopic(config.getConfigTopic())
+		return PublishRequest.newBuilder().setPayload(configRequest.toByteArray()).setTopic(config.getOutConfigTopic())
 				.setQos(1).setRetain(true).build();
 	}
 

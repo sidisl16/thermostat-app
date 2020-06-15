@@ -17,8 +17,9 @@ private static final long serialVersionUID = 0L;
   }
   private ConfigurationRequest() {
     requestId_ = "";
-    configTopic_ = "";
-    dataTopic_ = "";
+    inConfigTopic_ = "";
+    outConfigTopic_ = "";
+    inDataTopic_ = "";
     serialNo_ = "";
   }
 
@@ -55,21 +56,27 @@ private static final long serialVersionUID = 0L;
           case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            configTopic_ = s;
+            inConfigTopic_ = s;
             break;
           }
           case 26: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            dataTopic_ = s;
+            outConfigTopic_ = s;
             break;
           }
-          case 32: {
+          case 34: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            inDataTopic_ = s;
+            break;
+          }
+          case 40: {
 
             dataInterval_ = input.readInt32();
             break;
           }
-          case 42: {
+          case 50: {
             java.lang.String s = input.readStringRequireUtf8();
 
             serialNo_ = s;
@@ -141,87 +148,121 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int CONFIG_TOPIC_FIELD_NUMBER = 2;
-  private volatile java.lang.Object configTopic_;
+  public static final int IN_CONFIG_TOPIC_FIELD_NUMBER = 2;
+  private volatile java.lang.Object inConfigTopic_;
   /**
-   * <code>string config_topic = 2;</code>
+   * <code>string in_config_topic = 2;</code>
    */
-  public java.lang.String getConfigTopic() {
-    java.lang.Object ref = configTopic_;
+  public java.lang.String getInConfigTopic() {
+    java.lang.Object ref = inConfigTopic_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      configTopic_ = s;
+      inConfigTopic_ = s;
       return s;
     }
   }
   /**
-   * <code>string config_topic = 2;</code>
+   * <code>string in_config_topic = 2;</code>
    */
   public com.google.protobuf.ByteString
-      getConfigTopicBytes() {
-    java.lang.Object ref = configTopic_;
+      getInConfigTopicBytes() {
+    java.lang.Object ref = inConfigTopic_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      configTopic_ = b;
+      inConfigTopic_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int DATA_TOPIC_FIELD_NUMBER = 3;
-  private volatile java.lang.Object dataTopic_;
+  public static final int OUT_CONFIG_TOPIC_FIELD_NUMBER = 3;
+  private volatile java.lang.Object outConfigTopic_;
   /**
-   * <code>string data_topic = 3;</code>
+   * <code>string out_config_topic = 3;</code>
    */
-  public java.lang.String getDataTopic() {
-    java.lang.Object ref = dataTopic_;
+  public java.lang.String getOutConfigTopic() {
+    java.lang.Object ref = outConfigTopic_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      dataTopic_ = s;
+      outConfigTopic_ = s;
       return s;
     }
   }
   /**
-   * <code>string data_topic = 3;</code>
+   * <code>string out_config_topic = 3;</code>
    */
   public com.google.protobuf.ByteString
-      getDataTopicBytes() {
-    java.lang.Object ref = dataTopic_;
+      getOutConfigTopicBytes() {
+    java.lang.Object ref = outConfigTopic_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      dataTopic_ = b;
+      outConfigTopic_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int DATA_INTERVAL_FIELD_NUMBER = 4;
+  public static final int IN_DATA_TOPIC_FIELD_NUMBER = 4;
+  private volatile java.lang.Object inDataTopic_;
+  /**
+   * <code>string in_data_topic = 4;</code>
+   */
+  public java.lang.String getInDataTopic() {
+    java.lang.Object ref = inDataTopic_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      inDataTopic_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string in_data_topic = 4;</code>
+   */
+  public com.google.protobuf.ByteString
+      getInDataTopicBytes() {
+    java.lang.Object ref = inDataTopic_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      inDataTopic_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int DATA_INTERVAL_FIELD_NUMBER = 5;
   private int dataInterval_;
   /**
-   * <code>int32 data_interval = 4;</code>
+   * <code>int32 data_interval = 5;</code>
    */
   public int getDataInterval() {
     return dataInterval_;
   }
 
-  public static final int SERIAL_NO_FIELD_NUMBER = 5;
+  public static final int SERIAL_NO_FIELD_NUMBER = 6;
   private volatile java.lang.Object serialNo_;
   /**
-   * <code>string serial_no = 5;</code>
+   * <code>string serial_no = 6;</code>
    */
   public java.lang.String getSerialNo() {
     java.lang.Object ref = serialNo_;
@@ -236,7 +277,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string serial_no = 5;</code>
+   * <code>string serial_no = 6;</code>
    */
   public com.google.protobuf.ByteString
       getSerialNoBytes() {
@@ -269,17 +310,20 @@ private static final long serialVersionUID = 0L;
     if (!getRequestIdBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, requestId_);
     }
-    if (!getConfigTopicBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, configTopic_);
+    if (!getInConfigTopicBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, inConfigTopic_);
     }
-    if (!getDataTopicBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, dataTopic_);
+    if (!getOutConfigTopicBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, outConfigTopic_);
+    }
+    if (!getInDataTopicBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, inDataTopic_);
     }
     if (dataInterval_ != 0) {
-      output.writeInt32(4, dataInterval_);
+      output.writeInt32(5, dataInterval_);
     }
     if (!getSerialNoBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, serialNo_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, serialNo_);
     }
     unknownFields.writeTo(output);
   }
@@ -293,18 +337,21 @@ private static final long serialVersionUID = 0L;
     if (!getRequestIdBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, requestId_);
     }
-    if (!getConfigTopicBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, configTopic_);
+    if (!getInConfigTopicBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, inConfigTopic_);
     }
-    if (!getDataTopicBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, dataTopic_);
+    if (!getOutConfigTopicBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, outConfigTopic_);
+    }
+    if (!getInDataTopicBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, inDataTopic_);
     }
     if (dataInterval_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(4, dataInterval_);
+        .computeInt32Size(5, dataInterval_);
     }
     if (!getSerialNoBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, serialNo_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, serialNo_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -323,10 +370,12 @@ private static final long serialVersionUID = 0L;
 
     if (!getRequestId()
         .equals(other.getRequestId())) return false;
-    if (!getConfigTopic()
-        .equals(other.getConfigTopic())) return false;
-    if (!getDataTopic()
-        .equals(other.getDataTopic())) return false;
+    if (!getInConfigTopic()
+        .equals(other.getInConfigTopic())) return false;
+    if (!getOutConfigTopic()
+        .equals(other.getOutConfigTopic())) return false;
+    if (!getInDataTopic()
+        .equals(other.getInDataTopic())) return false;
     if (getDataInterval()
         != other.getDataInterval()) return false;
     if (!getSerialNo()
@@ -344,10 +393,12 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + REQUESTID_FIELD_NUMBER;
     hash = (53 * hash) + getRequestId().hashCode();
-    hash = (37 * hash) + CONFIG_TOPIC_FIELD_NUMBER;
-    hash = (53 * hash) + getConfigTopic().hashCode();
-    hash = (37 * hash) + DATA_TOPIC_FIELD_NUMBER;
-    hash = (53 * hash) + getDataTopic().hashCode();
+    hash = (37 * hash) + IN_CONFIG_TOPIC_FIELD_NUMBER;
+    hash = (53 * hash) + getInConfigTopic().hashCode();
+    hash = (37 * hash) + OUT_CONFIG_TOPIC_FIELD_NUMBER;
+    hash = (53 * hash) + getOutConfigTopic().hashCode();
+    hash = (37 * hash) + IN_DATA_TOPIC_FIELD_NUMBER;
+    hash = (53 * hash) + getInDataTopic().hashCode();
     hash = (37 * hash) + DATA_INTERVAL_FIELD_NUMBER;
     hash = (53 * hash) + getDataInterval();
     hash = (37 * hash) + SERIAL_NO_FIELD_NUMBER;
@@ -487,9 +538,11 @@ private static final long serialVersionUID = 0L;
       super.clear();
       requestId_ = "";
 
-      configTopic_ = "";
+      inConfigTopic_ = "";
 
-      dataTopic_ = "";
+      outConfigTopic_ = "";
+
+      inDataTopic_ = "";
 
       dataInterval_ = 0;
 
@@ -522,8 +575,9 @@ private static final long serialVersionUID = 0L;
     public com.sid.thermostat.app.protobuf.ConfigurationRequest buildPartial() {
       com.sid.thermostat.app.protobuf.ConfigurationRequest result = new com.sid.thermostat.app.protobuf.ConfigurationRequest(this);
       result.requestId_ = requestId_;
-      result.configTopic_ = configTopic_;
-      result.dataTopic_ = dataTopic_;
+      result.inConfigTopic_ = inConfigTopic_;
+      result.outConfigTopic_ = outConfigTopic_;
+      result.inDataTopic_ = inDataTopic_;
       result.dataInterval_ = dataInterval_;
       result.serialNo_ = serialNo_;
       onBuilt();
@@ -578,12 +632,16 @@ private static final long serialVersionUID = 0L;
         requestId_ = other.requestId_;
         onChanged();
       }
-      if (!other.getConfigTopic().isEmpty()) {
-        configTopic_ = other.configTopic_;
+      if (!other.getInConfigTopic().isEmpty()) {
+        inConfigTopic_ = other.inConfigTopic_;
         onChanged();
       }
-      if (!other.getDataTopic().isEmpty()) {
-        dataTopic_ = other.dataTopic_;
+      if (!other.getOutConfigTopic().isEmpty()) {
+        outConfigTopic_ = other.outConfigTopic_;
+        onChanged();
+      }
+      if (!other.getInDataTopic().isEmpty()) {
+        inDataTopic_ = other.inDataTopic_;
         onChanged();
       }
       if (other.getDataInterval() != 0) {
@@ -691,153 +749,222 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object configTopic_ = "";
+    private java.lang.Object inConfigTopic_ = "";
     /**
-     * <code>string config_topic = 2;</code>
+     * <code>string in_config_topic = 2;</code>
      */
-    public java.lang.String getConfigTopic() {
-      java.lang.Object ref = configTopic_;
+    public java.lang.String getInConfigTopic() {
+      java.lang.Object ref = inConfigTopic_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        configTopic_ = s;
+        inConfigTopic_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string config_topic = 2;</code>
+     * <code>string in_config_topic = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getConfigTopicBytes() {
-      java.lang.Object ref = configTopic_;
+        getInConfigTopicBytes() {
+      java.lang.Object ref = inConfigTopic_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        configTopic_ = b;
+        inConfigTopic_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string config_topic = 2;</code>
+     * <code>string in_config_topic = 2;</code>
      */
-    public Builder setConfigTopic(
+    public Builder setInConfigTopic(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      configTopic_ = value;
+      inConfigTopic_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string config_topic = 2;</code>
+     * <code>string in_config_topic = 2;</code>
      */
-    public Builder clearConfigTopic() {
+    public Builder clearInConfigTopic() {
       
-      configTopic_ = getDefaultInstance().getConfigTopic();
+      inConfigTopic_ = getDefaultInstance().getInConfigTopic();
       onChanged();
       return this;
     }
     /**
-     * <code>string config_topic = 2;</code>
+     * <code>string in_config_topic = 2;</code>
      */
-    public Builder setConfigTopicBytes(
+    public Builder setInConfigTopicBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      configTopic_ = value;
+      inConfigTopic_ = value;
       onChanged();
       return this;
     }
 
-    private java.lang.Object dataTopic_ = "";
+    private java.lang.Object outConfigTopic_ = "";
     /**
-     * <code>string data_topic = 3;</code>
+     * <code>string out_config_topic = 3;</code>
      */
-    public java.lang.String getDataTopic() {
-      java.lang.Object ref = dataTopic_;
+    public java.lang.String getOutConfigTopic() {
+      java.lang.Object ref = outConfigTopic_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        dataTopic_ = s;
+        outConfigTopic_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string data_topic = 3;</code>
+     * <code>string out_config_topic = 3;</code>
      */
     public com.google.protobuf.ByteString
-        getDataTopicBytes() {
-      java.lang.Object ref = dataTopic_;
+        getOutConfigTopicBytes() {
+      java.lang.Object ref = outConfigTopic_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        dataTopic_ = b;
+        outConfigTopic_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string data_topic = 3;</code>
+     * <code>string out_config_topic = 3;</code>
      */
-    public Builder setDataTopic(
+    public Builder setOutConfigTopic(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      dataTopic_ = value;
+      outConfigTopic_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string data_topic = 3;</code>
+     * <code>string out_config_topic = 3;</code>
      */
-    public Builder clearDataTopic() {
+    public Builder clearOutConfigTopic() {
       
-      dataTopic_ = getDefaultInstance().getDataTopic();
+      outConfigTopic_ = getDefaultInstance().getOutConfigTopic();
       onChanged();
       return this;
     }
     /**
-     * <code>string data_topic = 3;</code>
+     * <code>string out_config_topic = 3;</code>
      */
-    public Builder setDataTopicBytes(
+    public Builder setOutConfigTopicBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      dataTopic_ = value;
+      outConfigTopic_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object inDataTopic_ = "";
+    /**
+     * <code>string in_data_topic = 4;</code>
+     */
+    public java.lang.String getInDataTopic() {
+      java.lang.Object ref = inDataTopic_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        inDataTopic_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string in_data_topic = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getInDataTopicBytes() {
+      java.lang.Object ref = inDataTopic_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        inDataTopic_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string in_data_topic = 4;</code>
+     */
+    public Builder setInDataTopic(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      inDataTopic_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string in_data_topic = 4;</code>
+     */
+    public Builder clearInDataTopic() {
+      
+      inDataTopic_ = getDefaultInstance().getInDataTopic();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string in_data_topic = 4;</code>
+     */
+    public Builder setInDataTopicBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      inDataTopic_ = value;
       onChanged();
       return this;
     }
 
     private int dataInterval_ ;
     /**
-     * <code>int32 data_interval = 4;</code>
+     * <code>int32 data_interval = 5;</code>
      */
     public int getDataInterval() {
       return dataInterval_;
     }
     /**
-     * <code>int32 data_interval = 4;</code>
+     * <code>int32 data_interval = 5;</code>
      */
     public Builder setDataInterval(int value) {
       
@@ -846,7 +973,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>int32 data_interval = 4;</code>
+     * <code>int32 data_interval = 5;</code>
      */
     public Builder clearDataInterval() {
       
@@ -857,7 +984,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object serialNo_ = "";
     /**
-     * <code>string serial_no = 5;</code>
+     * <code>string serial_no = 6;</code>
      */
     public java.lang.String getSerialNo() {
       java.lang.Object ref = serialNo_;
@@ -872,7 +999,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string serial_no = 5;</code>
+     * <code>string serial_no = 6;</code>
      */
     public com.google.protobuf.ByteString
         getSerialNoBytes() {
@@ -888,7 +1015,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string serial_no = 5;</code>
+     * <code>string serial_no = 6;</code>
      */
     public Builder setSerialNo(
         java.lang.String value) {
@@ -901,7 +1028,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string serial_no = 5;</code>
+     * <code>string serial_no = 6;</code>
      */
     public Builder clearSerialNo() {
       
@@ -910,7 +1037,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string serial_no = 5;</code>
+     * <code>string serial_no = 6;</code>
      */
     public Builder setSerialNoBytes(
         com.google.protobuf.ByteString value) {

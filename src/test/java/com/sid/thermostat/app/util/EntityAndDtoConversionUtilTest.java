@@ -13,18 +13,18 @@ public class EntityAndDtoConversionUtilTest extends ThermostatAppApplicationTest
 	@Test
 	public void testCopyIgnoreNull() {
 		Config config = new Config();
-		config.setConfigTopic("/topic/randomconfig");
+		config.setInConfigTopic("/topic/randomconfig");
 		config.setDataInterval(10);
-		config.setDataTopic("/topic/randomdata");
+		config.setInDataTopic("/topic/randomdata");
 
 		ConfigDto configDto = new ConfigDto();
-		configDto.setConfigTopic("/topic/randomconfig1");
+		configDto.setInConfigTopic("/topic/randomconfig1");
 		config.setDataInterval(12);
 
 		EntityAndDtoConversionUtil.copyIgnoreNull(configDto, config);
 
-		assertEquals("/topic/randomconfig1", config.getConfigTopic());
+		assertEquals("/topic/randomconfig1", config.getInConfigTopic());
 		assertEquals(12, config.getDataInterval());
-		assertEquals("/topic/randomdata", config.getDataTopic());
+		assertEquals("/topic/randomdata", config.getInDataTopic());
 	}
 }

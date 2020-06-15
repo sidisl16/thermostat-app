@@ -23,18 +23,20 @@ message ProvisioningResponse {
 		FAILED = 1;
 	}
 	string serial_no = 1;
-	string config_topic = 2;
-	string data_topic = 3;
-	ProvStatus status = 4;
-	int32 qos = 5;
+	string in_config_topic = 2;
+	string out_config_topic = 3;
+	string in_data_topic = 4;
+	ProvStatus status = 5;
+	int32 qos = 6;
 }
 
 message ConfigurationRequest {
 	string requestId = 1;
-	string config_topic = 2;
-	string data_topic = 3;
-	int32 data_interval = 4;
-	string serial_no = 5;
+	string in_config_topic = 2;
+	string out_config_topic = 3;
+	string in_data_topic = 4;
+	int32 data_interval = 5;
+	string serial_no = 6;
 }
 
 message ConfigurationResponse {

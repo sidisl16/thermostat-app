@@ -18,36 +18,46 @@ public interface ProvisioningResponseOrBuilder extends
       getSerialNoBytes();
 
   /**
-   * <code>string config_topic = 2;</code>
+   * <code>string in_config_topic = 2;</code>
    */
-  java.lang.String getConfigTopic();
+  java.lang.String getInConfigTopic();
   /**
-   * <code>string config_topic = 2;</code>
-   */
-  com.google.protobuf.ByteString
-      getConfigTopicBytes();
-
-  /**
-   * <code>string data_topic = 3;</code>
-   */
-  java.lang.String getDataTopic();
-  /**
-   * <code>string data_topic = 3;</code>
+   * <code>string in_config_topic = 2;</code>
    */
   com.google.protobuf.ByteString
-      getDataTopicBytes();
+      getInConfigTopicBytes();
 
   /**
-   * <code>.thermostat.app.ProvisioningResponse.ProvStatus status = 4;</code>
+   * <code>string out_config_topic = 3;</code>
+   */
+  java.lang.String getOutConfigTopic();
+  /**
+   * <code>string out_config_topic = 3;</code>
+   */
+  com.google.protobuf.ByteString
+      getOutConfigTopicBytes();
+
+  /**
+   * <code>string in_data_topic = 4;</code>
+   */
+  java.lang.String getInDataTopic();
+  /**
+   * <code>string in_data_topic = 4;</code>
+   */
+  com.google.protobuf.ByteString
+      getInDataTopicBytes();
+
+  /**
+   * <code>.thermostat.app.ProvisioningResponse.ProvStatus status = 5;</code>
    */
   int getStatusValue();
   /**
-   * <code>.thermostat.app.ProvisioningResponse.ProvStatus status = 4;</code>
+   * <code>.thermostat.app.ProvisioningResponse.ProvStatus status = 5;</code>
    */
   com.sid.thermostat.app.protobuf.ProvisioningResponse.ProvStatus getStatus();
 
   /**
-   * <code>int32 qos = 5;</code>
+   * <code>int32 qos = 6;</code>
    */
   int getQos();
 }

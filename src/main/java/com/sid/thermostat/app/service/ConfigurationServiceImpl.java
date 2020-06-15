@@ -67,7 +67,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	public ConfigDto pushConfigForSerialNo(ConfigDto configDto, String serialNo) throws RestException {
 		logger.log(Level.INFO, "Configuring device serialNo [" + serialNo + "]");
 		Optional<Device> device = deviceRepository.findBySerialNo(serialNo);
-		Optional<Config> optionalConfig = Optional.ofNullable(null);// initialize
+		Optional<Config> optionalConfig = configurationDAL.getConfigBySerialNo(serialNo);
 		validate(serialNo, device, optionalConfig);
 		Config config = updateConfig(optionalConfig.get(), configDto);
 		logger.log(Level.INFO, "Executing configuration for device, serialNo [" + serialNo + "]");
@@ -81,7 +81,6 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	private void validate(String serialNo, Optional<Device> device, Optional<Config> optionalConfig)
 			throws RestException {
 		if (device.isPresent()) {
-			optionalConfig = configurationDAL.getConfigBySerialNo(serialNo);
 			if (optionalConfig.isPresent() && !(optionalConfig.get().getStatus() == Status.COMPLETED)) {
 				logger.log(Level.WARNING,
 						"Configuration is already in progress for device, serialNo [" + serialNo + "]");
@@ -110,12 +109,15 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	private ConfigurationRequest getConfigurationRequest(Config config, String serialNo) {
 		Config newConfig = config.getNewConfig();
 		ConfigurationRequest.Builder builder = ConfigurationRequest.newBuilder();
-		if (newConfig.getConfigTopic() != null)
-			builder.setConfigTopic(newConfig.getConfigTopic());
+		builder.setSerialNo(serialNo);
+		if (newConfig.getInConfigTopic() != null)
+			builder.setInConfigTopic(newConfig.getInConfigTopic());
+		if (newConfig.getOutConfigTopic() != null)
+			builder.setOutConfigTopic(newConfig.getOutConfigTopic());
 		if (newConfig.getDataInterval() != null)
 			builder.setDataInterval(newConfig.getDataInterval());
-		if (newConfig.getDataTopic() != null)
-			builder.setDataInterval(newConfig.getDataInterval());
+		if (newConfig.getInDataTopic() != null)
+			builder.setInDataTopic(newConfig.getInDataTopic());
 		builder.setRequestId(UUID.randomUUID().toString());
 		return builder.build();
 	}

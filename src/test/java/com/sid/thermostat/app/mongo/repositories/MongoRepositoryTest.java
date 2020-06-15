@@ -40,16 +40,17 @@ public class MongoRepositoryTest extends ThermostatAppApplicationTests {
 	private ObjectId deviceId;
 	private ObjectId configId;
 	private ObjectId dataId;
-	private String serialNo = "SERIAL2R345";
+	private String serialNo = "SERIAL2R3456";
 
 	@Test
 	@Order(1)
 	public void testDevicePersistance() {
 		Config config = new Config();
-		config.setConfigTopic("/inbound/configuration/SERIAL2R345");
+		config.setInConfigTopic("/inbound/configuration/SERIAL2R3456");
+		config.setOutConfigTopic("/outbound/configuration/SERIAL2R3456");
 		config.setCreatedAt(System.currentTimeMillis());
 		config.setDataInterval(300);
-		config.setDataTopic("/inbound/data/SERIAL2R345");
+		config.setInDataTopic("/inbound/data/SERIAL2R3456");
 		config.setLastModified(System.currentTimeMillis());
 		config.setRetryAttempt(0);
 		config.setStatus(Status.COMPLETED);

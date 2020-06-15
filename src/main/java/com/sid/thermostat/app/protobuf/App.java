@@ -52,21 +52,22 @@ public final class App {
       "erial_no\030\001 \001(\t\022\023\n\013device_time\030\002 \001(\004\022\023\n\013t" +
       "emperature\030\003 \001(\002\"Q\n\023ProvisioningRequest\022" +
       "\021\n\tserial_no\030\001 \001(\t\022\022\n\nip_address\030\002 \001(\t\022\023" +
-      "\n\013mac_address\030\003 \001(\t\"\310\001\n\024ProvisioningResp" +
-      "onse\022\021\n\tserial_no\030\001 \001(\t\022\024\n\014config_topic\030" +
-      "\002 \001(\t\022\022\n\ndata_topic\030\003 \001(\t\022?\n\006status\030\004 \001(" +
-      "\0162/.thermostat.app.ProvisioningResponse." +
-      "ProvStatus\022\013\n\003qos\030\005 \001(\005\"%\n\nProvStatus\022\013\n" +
-      "\007SUCCESS\020\000\022\n\n\006FAILED\020\001\"}\n\024ConfigurationR" +
-      "equest\022\021\n\trequestId\030\001 \001(\t\022\024\n\014config_topi" +
-      "c\030\002 \001(\t\022\022\n\ndata_topic\030\003 \001(\t\022\025\n\rdata_inte" +
-      "rval\030\004 \001(\005\022\021\n\tserial_no\030\005 \001(\t\"\252\001\n\025Config" +
-      "urationResponse\022\021\n\trequestId\030\001 \001(\t\022\021\n\tse" +
-      "rial_no\030\002 \001(\t\022B\n\006status\030\003 \001(\01622.thermost" +
-      "at.app.ConfigurationResponse.ConfigStatu" +
-      "s\"\'\n\014ConfigStatus\022\013\n\007SUCCESS\020\000\022\n\n\006FAILED" +
-      "\020\001B#\n\037com.sid.thermostat.app.protobufP\001b" +
-      "\006proto3"
+      "\n\013mac_address\030\003 \001(\t\"\350\001\n\024ProvisioningResp" +
+      "onse\022\021\n\tserial_no\030\001 \001(\t\022\027\n\017in_config_top" +
+      "ic\030\002 \001(\t\022\030\n\020out_config_topic\030\003 \001(\t\022\025\n\rin" +
+      "_data_topic\030\004 \001(\t\022?\n\006status\030\005 \001(\0162/.ther" +
+      "mostat.app.ProvisioningResponse.ProvStat" +
+      "us\022\013\n\003qos\030\006 \001(\005\"%\n\nProvStatus\022\013\n\007SUCCESS" +
+      "\020\000\022\n\n\006FAILED\020\001\"\235\001\n\024ConfigurationRequest\022" +
+      "\021\n\trequestId\030\001 \001(\t\022\027\n\017in_config_topic\030\002 " +
+      "\001(\t\022\030\n\020out_config_topic\030\003 \001(\t\022\025\n\rin_data" +
+      "_topic\030\004 \001(\t\022\025\n\rdata_interval\030\005 \001(\005\022\021\n\ts" +
+      "erial_no\030\006 \001(\t\"\252\001\n\025ConfigurationResponse" +
+      "\022\021\n\trequestId\030\001 \001(\t\022\021\n\tserial_no\030\002 \001(\t\022B" +
+      "\n\006status\030\003 \001(\01622.thermostat.app.Configur" +
+      "ationResponse.ConfigStatus\"\'\n\014ConfigStat" +
+      "us\022\013\n\007SUCCESS\020\000\022\n\n\006FAILED\020\001B#\n\037com.sid.t" +
+      "hermostat.app.protobufP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -97,13 +98,13 @@ public final class App {
     internal_static_thermostat_app_ProvisioningResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_thermostat_app_ProvisioningResponse_descriptor,
-        new java.lang.String[] { "SerialNo", "ConfigTopic", "DataTopic", "Status", "Qos", });
+        new java.lang.String[] { "SerialNo", "InConfigTopic", "OutConfigTopic", "InDataTopic", "Status", "Qos", });
     internal_static_thermostat_app_ConfigurationRequest_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_thermostat_app_ConfigurationRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_thermostat_app_ConfigurationRequest_descriptor,
-        new java.lang.String[] { "RequestId", "ConfigTopic", "DataTopic", "DataInterval", "SerialNo", });
+        new java.lang.String[] { "RequestId", "InConfigTopic", "OutConfigTopic", "InDataTopic", "DataInterval", "SerialNo", });
     internal_static_thermostat_app_ConfigurationResponse_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_thermostat_app_ConfigurationResponse_fieldAccessorTable = new

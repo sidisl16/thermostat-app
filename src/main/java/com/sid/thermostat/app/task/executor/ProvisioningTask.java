@@ -25,7 +25,8 @@ public class ProvisioningTask extends AsyncTask {
 	private static Logger logger = Logger.getLogger(ProvisioningTask.class.getName());
 
 	private static final String DEFAULT_DATA_TOPIC_PATTERN = "/inbound/data/%s";
-	private static final String DEFAULT_CONFIG_TOPIC_PATTERN = "/inbound/configuration/%s";
+	private static final String DEFAULT_IN_CONFIG_TOPIC_PATTERN = "/inbound/configuration/%s";
+	private static final String DEFAULT_OUT_CONFIG_TOPIC_PATTERN = "/outbound/configuration/%s";
 	private static final String DEFAULT_PROVISIONING_TOPIC_PATTERN = "/outbound/provisioning/%s";
 
 	private ProvisioningRequest request;
@@ -76,19 +77,21 @@ public class ProvisioningTask extends AsyncTask {
 	}
 
 	private ProvisioningResponse getProvisioningResponseObject(Device device, Config config) {
-		return ProvisioningResponse.newBuilder().setConfigTopic(config.getConfigTopic())
-				.setDataTopic(config.getConfigTopic()).setQos(1).setSerialNo(device.getSerialNo())
-				.setStatus(ProvStatus.SUCCESS).build();
+		return ProvisioningResponse.newBuilder().setInConfigTopic(DEFAULT_IN_CONFIG_TOPIC_PATTERN)
+				.setOutConfigTopic(DEFAULT_OUT_CONFIG_TOPIC_PATTERN).setInDataTopic(DEFAULT_DATA_TOPIC_PATTERN)
+				.setQos(1).setSerialNo(device.getSerialNo()).setStatus(ProvStatus.SUCCESS).build();
 	}
 
 	private Config persistDefaultConfig(Device device) {
 		// Persist device default config
 		long now = System.currentTimeMillis();
 		Config config = new Config();
-		config.setConfigTopic(String.format(DEFAULT_CONFIG_TOPIC_PATTERN, device.getSerialNo()));
-		config.setCreatedAt(now);
+
+		config.setInConfigTopic(String.format(DEFAULT_IN_CONFIG_TOPIC_PATTERN, device.getSerialNo()));
+		config.setOutConfigTopic(String.format(DEFAULT_OUT_CONFIG_TOPIC_PATTERN, device.getSerialNo()));
 		config.setDataInterval(5000);
-		config.setDataTopic(String.format(DEFAULT_DATA_TOPIC_PATTERN, device.getSerialNo()));
+		config.setInDataTopic(String.format(DEFAULT_DATA_TOPIC_PATTERN, device.getSerialNo()));
+		config.setCreatedAt(now);
 		config.setLastModified(now);
 		config.setRetryAttempt(5);
 		// Initial Config would go as a part of provisioning response, so it is always

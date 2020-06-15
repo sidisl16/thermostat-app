@@ -9,13 +9,16 @@ public class Config {
 	@Id
 	private ObjectId id;
 
-	@Field(value = "config_topic")
-	private String configTopic;
+	@Field(value = "in_config_topic")
+	private String inConfigTopic;
 
-	@Field(value = "data_topic")
-	private String dataTopic;
+	@Field(value = "out_config_topic")
+	private String outConfigTopic;
 
-	@Field(value = "data_interval")
+	@Field(value = "in_data_topic")
+	private String inDataTopic;
+
+	@Field(value = "in_data_interval")
 	private Integer dataInterval;
 
 	@Field(value = "status")
@@ -41,20 +44,28 @@ public class Config {
 		this.id = id;
 	}
 
-	public String getConfigTopic() {
-		return configTopic;
+	public String getInConfigTopic() {
+		return inConfigTopic;
 	}
 
-	public void setConfigTopic(String configTopic) {
-		this.configTopic = configTopic;
+	public void setInConfigTopic(String inConfigTopic) {
+		this.inConfigTopic = inConfigTopic;
 	}
 
-	public String getDataTopic() {
-		return dataTopic;
+	public String getOutConfigTopic() {
+		return outConfigTopic;
 	}
 
-	public void setDataTopic(String dataTopic) {
-		this.dataTopic = dataTopic;
+	public void setOutConfigTopic(String outConfigTopic) {
+		this.outConfigTopic = outConfigTopic;
+	}
+	
+	public String getInDataTopic() {
+		return inDataTopic;
+	}
+
+	public void setInDataTopic(String inDataTopic) {
+		this.inDataTopic = inDataTopic;
 	}
 
 	public Integer getDataInterval() {

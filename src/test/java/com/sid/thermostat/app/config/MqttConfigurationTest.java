@@ -33,7 +33,7 @@ public class MqttConfigurationTest extends ThermostatAppApplicationTests {
 			@Override
 			public void messageArrived(String topic, MqttMessage message) throws Exception {
 				ProvisioningResponse response = ProvisioningResponse.parseFrom(message.getPayload());
-				assertEquals("/inbound/configuration/SERIAL456790", response.getConfigTopic());
+				assertEquals("/inbound/configuration/SERIAL456790", response.getInConfigTopic());
 			}
 		});
 		try {

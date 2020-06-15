@@ -18,36 +18,46 @@ public interface ConfigurationRequestOrBuilder extends
       getRequestIdBytes();
 
   /**
-   * <code>string config_topic = 2;</code>
+   * <code>string in_config_topic = 2;</code>
    */
-  java.lang.String getConfigTopic();
+  java.lang.String getInConfigTopic();
   /**
-   * <code>string config_topic = 2;</code>
-   */
-  com.google.protobuf.ByteString
-      getConfigTopicBytes();
-
-  /**
-   * <code>string data_topic = 3;</code>
-   */
-  java.lang.String getDataTopic();
-  /**
-   * <code>string data_topic = 3;</code>
+   * <code>string in_config_topic = 2;</code>
    */
   com.google.protobuf.ByteString
-      getDataTopicBytes();
+      getInConfigTopicBytes();
 
   /**
-   * <code>int32 data_interval = 4;</code>
+   * <code>string out_config_topic = 3;</code>
+   */
+  java.lang.String getOutConfigTopic();
+  /**
+   * <code>string out_config_topic = 3;</code>
+   */
+  com.google.protobuf.ByteString
+      getOutConfigTopicBytes();
+
+  /**
+   * <code>string in_data_topic = 4;</code>
+   */
+  java.lang.String getInDataTopic();
+  /**
+   * <code>string in_data_topic = 4;</code>
+   */
+  com.google.protobuf.ByteString
+      getInDataTopicBytes();
+
+  /**
+   * <code>int32 data_interval = 5;</code>
    */
   int getDataInterval();
 
   /**
-   * <code>string serial_no = 5;</code>
+   * <code>string serial_no = 6;</code>
    */
   java.lang.String getSerialNo();
   /**
-   * <code>string serial_no = 5;</code>
+   * <code>string serial_no = 6;</code>
    */
   com.google.protobuf.ByteString
       getSerialNoBytes();
