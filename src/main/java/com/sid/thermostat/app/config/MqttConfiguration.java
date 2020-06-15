@@ -5,6 +5,8 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.annotation.PreDestroy;
+
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -30,13 +32,14 @@ public class MqttConfiguration {
 	private static final String DEFAULT_SERVER = "tcp://localhost:1883";
 	private static final String DEFAULT_CLIENT_ID = "mqtt-client-" + UUID.randomUUID().toString();
 	private static final String DEFAULT_CONCURRENCY = "10";
+	private MqttClient mqttClient;
 
-	@Bean
+	@Bean(destroyMethod = "")
 	public MqttClient getMqttClient() throws MqttException {
 		String serverURI = env.getProperty("mqtt.server.url", DEFAULT_SERVER);
 		String clientId = env.getProperty("mqtt.client.id", DEFAULT_CLIENT_ID);
 		logger.log(Level.INFO, "Creating mqtt client server[" + serverURI + "] clientId[" + clientId + "]");
-		MqttClient mqttClient = new MqttClient(serverURI, clientId, new MqttDefaultFilePersistence(),
+		mqttClient = new MqttClient(serverURI, clientId, new MqttDefaultFilePersistence(),
 				Executors.newScheduledThreadPool(
 						Integer.parseInt(env.getProperty("mqtt.client.concurrency", DEFAULT_CONCURRENCY))));
 		logger.log(Level.INFO, "Mqtt Client[" + clientId + "] connecting to Server[" + serverURI + "]");
@@ -72,5 +75,23 @@ public class MqttConfiguration {
 		options.setCleanSession(false);
 		options.setConnectionTimeout(10000);
 		return options;
+	}
+
+	@PreDestroy
+	public void shutdown() {
+		if (mqttClient.isConnected()) {
+			try {
+				subject.getAllObserver().forEach(observer -> {
+					try {
+						mqttClient.unsubscribe(observer.getTopicFilter());
+					} catch (MqttException e) {
+						e.printStackTrace();
+					}
+				});
+				mqttClient.disconnect();
+			} catch (MqttException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
